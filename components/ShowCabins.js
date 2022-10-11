@@ -29,7 +29,11 @@ const ShowCabins = ({ images }) => {
         </div>
         <div className={cardStyles.album2}>
           {images.map((image) => (
-            <Card className={cardStyles.card} sx={{ maxWidth: 320, m: -0.2 }}>
+            <Card
+              key={image.id}
+              className={cardStyles.card}
+              sx={{ maxWidth: 320, m: -0.2 }}
+            >
               <CardActionArea>
                 <CardMedia
                   style={{ maxHeight: "14vh" }}

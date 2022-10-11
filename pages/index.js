@@ -9,13 +9,13 @@ export default function Home({ images }) {
       <Head>
         <style>
           @import
-          url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@100;400;600;900&display=swap');
+          url("https://fonts.googleapis.com/css2?family=League+Spartan:wght@100;400;600;900&display=swap");
         </style>
         <link
           rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
           integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
-          crossorigin="anonymous"
+          crossOrigin="anonymous"
         />
         <title>Webdev news</title>
         <meta name="keywords" content="web dev" lang="en" />
