@@ -45,10 +45,16 @@ const ShowCabins = ({ images }) => {
                 />
                 <CardContent>
                   <div
-                    style={{ color: "black", marginTop: "0px" }}
+                    style={{
+                      color: "black",
+                      margin: "0px",
+                      padding: "0px",
+                      textShadow: "none",
+                      bottom: "-1rem",
+                    }}
                     className={cardStyles.description}
                   >
-                    <h1>{image.id}</h1>
+                    <p>{image.id}</p>
                   </div>
                 </CardContent>
               </CardActionArea>

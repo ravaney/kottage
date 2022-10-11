@@ -81,6 +81,7 @@
 .description{
     position: absolute;
     bottom:10px;
+    padding-bottom: 0px;
     left: 20px;
     z-index: 2;
     color: white;
