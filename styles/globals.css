@@ -7,9 +7,7 @@ body {
 
 }
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+
 
 a {
   color: inherit;
