@@ -18,9 +18,9 @@ const ShowCabins = ({ images }) => {
           <img className={cardStyles.img} src="yellowCabbin.jpg" />
           <div>
             <div className={cardStyles.description}>
-              <h1>Fall Cabbin in Tunisia</h1>
+              <h1>Fall Cabbin in Alaska</h1>
               <p>
-                Beautiful cabin in Alascan country side by a river. Quiet place
+                Beautiful cabin in Alaskan country side by a river. Quiet place
                 and abudance of nature ready to be explored by you and your
                 family
               </p>
