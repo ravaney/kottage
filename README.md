@@ -32,3 +32,11 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## About the App
+
+Kottage is a web service that allows you to search for rental cottages and cabins. it has a search bar that accepts dates for the duration of your stay, location and number of guests.
+
+Kottage aims to compete with other businesses in the field of renting extra rooms.
+
+This is a perso al project of mine, I am building it to test my skills using nextjs, react, bootstrap and other frameworks and libraries of javascript.
