@@ -1,9 +1,11 @@
 .heading{
     font-size: 40px;
+    width: fit-content;
+    max-width: 100vw;
     display:flex;
     justify-content: center;
     color: white ;
-    margin: 20px 20px; 
+    margin: auto !important;
     padding-left: 20px;
     font-family: 'League Spartan', sans-serif;
     font-weight: 600;
@@ -12,13 +14,13 @@
 }
 .container{
     display: block;
-    margin: 0px;
-    padding: 0 0 ;
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px ;
     padding-bottom: 10vh;
-    width: 99vw;
-    height: auto;
+    width: 100%;
+    /* height: auto; */
     overflow: hidden;
-    max-width: 100%;
+    max-width: 99vw ;
     justify-content: center;
     background-image: url(../public/cottage2.jpg);
     background-repeat: no-repeat;
@@ -35,6 +37,7 @@
     height: auto;
     /* max-height: 35vh; */
     width: fit-content;
+    max-width: 100vw;
     display: block ;
     margin-bottom: 20vh;
     opacity:0.9;
@@ -61,7 +64,7 @@
     padding-right: 0px;
     margin-right: 0px;    
     width: 100%;
-    min-width: 215px;
+    /* min-width: 215px; */
     display: flex;
 }
 
@@ -74,7 +77,9 @@
 
 
 @media only screen and (min-width:1000px){
-    
+    .container{
+        width:100vw
+    }
     .inputContainer{
         display: flex;
         width: fit-content;
@@ -103,10 +108,16 @@
     .dates{
         width: fit-content;
     }
-    .inputContainer{
-        display: block;
+    .container{
+        max-width: 100%;
     }
     
+}
+
+@media only screen and (max-width:250px){
+    #body{
+        min-width: 250px;
+    }
 }
 
 

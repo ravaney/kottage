@@ -1,11 +1,12 @@
 .heading{
     font-size: 22px;
     display:flex;
-    flex-wrap: wrap;
-    justify-content: left;
+    justify-content: center;
+    width: fit-content;
+    max-width: 100vw;
     color: black ;
-    margin: 16px 0 16px 10vw; 
-    /* padding-left: 20px; */
+    margin: 16px 0 10px 10vw; 
+    padding-left: 20px;
     font-family: 'League Spartan', sans-serif;
     font-weight: 600;
 
@@ -41,7 +42,8 @@
 
 
 .caption {
-    display: block;
+   
+    display: flex;
     justify-content: left;
     padding: 0px;
     margin: 0px;
@@ -56,6 +58,12 @@
     }
     .heading{
         margin-left: 10px;
+    }
+}
+
+@media only screen and (max-width:500px){
+    .heading{
+        margin:auto !important
     }
 }
 
