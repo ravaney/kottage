@@ -1,0 +1,113 @@
+.heading{
+    font-size: 40px;
+    display:flex;
+    justify-content: center;
+    color: white ;
+    margin: 20px 20px; 
+    padding-left: 20px;
+    font-family: 'League Spartan', sans-serif;
+    font-weight: 600;
+    text-shadow: 0 0 10px rgba(0,0,0,0.9);
+
+}
+.container{
+    display: block;
+    margin: 0px;
+    padding: 0 0 ;
+    padding-bottom: 10vh;
+    width: 99vw;
+    height: auto;
+    overflow: hidden;
+    max-width: 100%;
+    justify-content: center;
+    background-image: url(../public/cottage2.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.inputContainer{
+    background-color: white;
+    padding: 20px 20px  ;
+    padding-bottom: 0px;
+    opacity: 1;
+    margin: auto !important;
+    height: auto;
+    /* max-height: 35vh; */
+    width: fit-content;
+    display: block ;
+    margin-bottom: 20vh;
+    opacity:0.9;
+    column-gap: 8px;
+    border-radius: 8px;
+    border: 1px solid #ddddde;
+    font-family: 'League Spartan', sans-serif;
+    min-width: 215px;
+
+
+}
+
+.dates{
+    display: flex;
+    width: 100%;
+    margin-bottom: 20px;
+    column-gap: 8px;
+}
+
+
+
+.inputField{
+    margin-bottom:20px;
+    padding-right: 0px;
+    margin-right: 0px;    
+    width: 100%;
+    min-width: 215px;
+    display: flex;
+}
+
+.searchIcon{   
+     margin-bottom:20px;   
+     width: 100%; 
+
+}
+
+
+
+@media only screen and (min-width:1000px){
+    
+    .inputContainer{
+        display: flex;
+        width: fit-content;
+    }
+    .dates{
+        width: 100%;
+    }
+    .inputField{
+        width: 50%;
+    }
+    .searchIcon{
+        width: fit-content;
+        padding-bottom: 0px;
+    }
+    
+}
+
+@media only screen and (max-width:768px){
+   
+    .inputField{
+        width: 100%;
+    }
+    .searchIcon{
+        width: 100%;
+    }
+    .dates{
+        width: fit-content;
+    }
+    .inputContainer{
+        display: block;
+    }
+    
+}
+
+
+
