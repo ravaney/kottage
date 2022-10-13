@@ -1,18 +1,10 @@
-import {
-  Card,
-  CardMedia,
-  CardContent,
-  Typography,
-  CardActionArea,
-} from "@mui/material";
+import { Card, CardMedia, CardContent, CardActionArea } from "@mui/material";
 import cardStyles from "../styles/ShowCabins.module.css";
 
 const ShowCabins = ({ images }) => {
   return (
     <>
-      <Typography className={cardStyles.heading}>
-        Rent a room or the whole place
-      </Typography>
+      <h3 className={cardStyles.heading}>Rent a room or the whole place</h3>
       <div className={cardStyles.container}>
         <div className={cardStyles.album}>
           <img className={cardStyles.img} src="yellowCabbin.jpg" />

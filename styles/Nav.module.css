@@ -28,6 +28,7 @@
   }
   .logo{
     width:auto !important;
+    max-width: 100vw;
     height:48px !important;
     position: relative;
     display:block;

@@ -1,10 +1,4 @@
-import {
-  Grid,
-  IconButton,
-  InputAdornment,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Grid, IconButton, InputAdornment, TextField } from "@mui/material";
 import React, { Component } from "react";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -23,9 +17,7 @@ const Search = () => {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <Grid className={searchStyles.container}>
-        <Typography className={searchStyles.heading}>
-          Find a Vacation Kottage
-        </Typography>
+        <h3 className={searchStyles.heading}>Find a Vacation Kottage</h3>
         <div className={searchStyles.inputContainer}>
           <TextField
             className={searchStyles.inputField}

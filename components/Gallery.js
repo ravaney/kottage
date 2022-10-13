@@ -1,13 +1,12 @@
 import galleryStyles from "../styles/Gallery.module.css";
 import Carousel from "react-bootstrap/Carousel";
-import { Typography } from "@mui/material";
 
 const Gallery = () => {
   return (
     <>
-      <Typography className={galleryStyles.heading}>
+      <h3 className={galleryStyles.heading}>
         Get inspired by our most Poplar Cabins
-      </Typography>
+      </h3>
 
       <Carousel
         // indicators={false}
