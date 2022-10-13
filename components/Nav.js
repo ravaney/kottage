@@ -32,9 +32,9 @@ const Nav = () => {
       </ul>
       <ul>
         {/* <li>{loginButton}</li> */}
-        {/* <li>
+        <li>
           <AccountMenu className={navStyles.pfp} />
-        </li> */}
+        </li>
       </ul>
     </nav>
   );

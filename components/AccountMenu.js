@@ -2,7 +2,7 @@ import * as React from "react";
 import Popover from "@mui/material/Popover";
 import Typography from "@mui/material/Typography";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { getNativeSelectUtilityClasses, IconButton } from "@mui/material";
+import { IconButton } from "@mui/material";
 import navStyles from "../styles/Nav.module.css";
 export default function BasicPopover() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -34,7 +34,7 @@ export default function BasicPopover() {
         onClose={handleClose}
         anchorOrigin={{
           vertical: "bottom",
-          horizontal: "left",
+          horizontal: "center",
         }}
       >
         <Typography sx={{ p: 2 }}>

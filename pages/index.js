@@ -7,10 +7,6 @@ export default function Home({ images }) {
   return (
     <div>
       <Head>
-        <style>
-          @import
-          url("https://fonts.googleapis.com/css2?family=League+Spartan:wght@100;400;600;900&display=swap");
-        </style>
         <link
           rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
