@@ -24,7 +24,7 @@ const ShowCabins = ({ images }) => {
             <Card
               key={image.id}
               className={cardStyles.card}
-              sx={{ maxWidth: 320, m: -0.2 }}
+              sx={{ maxWidth: 320, m: 1, p: 0 }}
             >
               <CardActionArea>
                 <CardMedia
