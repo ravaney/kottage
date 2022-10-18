@@ -29,8 +29,23 @@ const Nav = () => {
             </a>
           </Link>
         </li>
+        <li>
+          <Link href="/Properties">
+            <a>Properties</a>
+          </Link>
+        </li>
+        <li>
+          <Link href="/Login">
+            <a>Login</a>
+          </Link>
+        </li>
+        <li>
+          <Link href="/Logout">
+            <a>Logout</a>
+          </Link>
+        </li>
       </ul>
-      <ul>
+      <ul style={{ margin: "0px", padding: "0px" }}>
         {/* <li>{loginButton}</li> */}
         <li>
           <AccountMenu className={navStyles.pfp} />

@@ -5,59 +5,55 @@
     color: black ;
     margin: 16px 0px 0px 10vw; 
     margin-left: 10vw;
-    padding-left: 20px;
     font-weight: 600;
     width: fit-content;
     max-width: 100vw;
-
-
 }
 .container{
     display: flex;
     flex-direction: row;
-    max-height: 40vh;
+    height: 40vh;
     width: 100%;
     max-width: 80vw;
-    padding-top:16px;
-    /* margin: 0px 120px 0px 120px; */
     margin: auto;
     justify-content: center;
-    /* background-color: brown; */
-
+    background-color: blueviolet;
 }
 .img{
     object-fit: cover;
     height: 100%;
     width: 100%;
+    /* overflow: hidden; */
 }
 
-
 .album{
+    box-sizing: border-box;
     display: flex;
-    width: 100vw;
-    max-width: 100vw;
-    height: auto;
-    /* min-height: 100%; */
+    width: 50%;
+    height: 100%;
+    padding: 0px;
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    margin: 0px;
+    margin: auto !important;
     position: relative;
     z-index: 1;
-    padding: 0px;
     object-fit: cover;
 }
 .album2{
     display: flex;
     flex-wrap: wrap;
     overflow: hidden;
-    width: 100vw;
-    height: auto;
+    width: 50%;
+    height: 100%;
     position: relative;
-    margin: 0px;
+    /* margin: auto !important; */
     align-items: center;
     justify-content: center;
     padding: 0px;
+    margin: 0px;
+    object-fit: cover;
+    box-sizing: border-box;
 }
 .card{
     width: 100%;
@@ -68,46 +64,40 @@
     background-color: white;
     border-color: white;
     border-radius: 0px;
-    max-width: 19vw;
+    max-width: 18vw;
     margin-left: 10px;
-    margin: 5px;
-    object-fit: cover;
-
-       
+    margin: 10px 10px 10px 10px;
+    padding: 0px;
+    object-fit: cover;       
 }
 
 .img:hover{
     transform: scale(1.3);
     z-index: 1;
-    transition-duration: 1s;
-    
+    transition-duration: 1s;    
 }
 
 .description{
-    max-width: 100vw;
     width: fit-content;
-    /* padding-left: 20px; */
+    box-sizing: border-box;
     margin: auto !important;
-    /* margin-left: 10vw; */
-    justify-content: left;
-    
-    /* changes above */
+    justify-content: left;    
     position: absolute;
     bottom:10px;
     left: 20px;
     z-index: 2;
     color: white;
     text-shadow: 0 0 10px rgba(0,0,0,.9);
-
+    padding-right: 5px;
 }
 
 @media only screen and (max-width:1000px){
     .container{
         max-height: 50%;
+        height: auto;
         display: block;
         max-width: 100%;
         margin: 0px;
-        min-width: 500px;
     }
     .album{
         width: 100%;
@@ -118,12 +108,16 @@
     .card{
         margin-top: 10px;
     }
+    .heading{
+        margin-left: 10px;
+    }
 }
 
 @media only screen and (max-width:500px){
     
     .heading{
         margin: auto !important;
+        padding-left: 20px;
         
     }
     .album{
@@ -139,6 +133,7 @@
         margin: auto;
         padding: auto;
     }
+    
     
 }
 
