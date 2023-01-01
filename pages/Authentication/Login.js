@@ -86,12 +86,12 @@ const Login = () => {
         <button type="submit" disabled={loading2}>
           Login
         </button>
-        <a
+        <Link
           style={{ display: "block", margin: 40, color: "blue" }}
           href="/Authentication/Signup"
         >
           Sign up for an Account
-        </a>
+        </Link>
       </form>
     </div>
   );
