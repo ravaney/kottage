@@ -1,23 +1,22 @@
 import Link from "next/link";
 import navStyles from "../styles/Nav.module.css";
-import Image from "next/image";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import AccountMenu from "../components/AccountMenu.js";
-import { useState, useEffect } from "react";
-import LoginIcon from "@mui/icons-material/Login";
-import LogoutIcon from "@mui/icons-material/Logout";
+import { useAuth } from "./contexts/userContext";
+import { useRouter } from "next/router";
 
 const Nav = () => {
-  const [login, setLogin] = useState("false");
-  var loginButton;
+  const { logout, user } = useAuth();
+  const router = useRouter();
 
-  if (login == "true") {
-    loginButton = <LoginIcon style={{ color: "green" }} />;
-  } else loginButton = <LogoutIcon style={{ color: "red" }} />;
-
-  useEffect(() => {
-    login, loginButton;
-  }, []);
+  async function handleLogout() {
+    try {
+      await logout();
+      console.log("logged out");
+      router.push("/");
+    } catch (err) {
+      alert(err);
+    }
+  }
 
   return (
     <nav className={navStyles.nav}>
@@ -34,19 +33,27 @@ const Nav = () => {
             <a>Properties</a>
           </Link>
         </li>
-        <li>
-          <Link href="/Login">
-            <a>Login</a>
-          </Link>
-        </li>
-        <li>
-          <Link href="/Logout">
-            <a>Logout</a>
-          </Link>
-        </li>
       </ul>
       <ul style={{ margin: "0px", padding: "0px" }}>
-        {/* <li>{loginButton}</li> */}
+        {!user ? (
+          <li style={{ margin: "0px", padding: "0px" }}>
+            <Link href="/Authentication/Login">
+              <a>Login</a>
+            </Link>
+          </li>
+        ) : (
+          <li>
+            <a>
+              <div style={{ color: "green" }}>Welcome {user?.email}</div>
+              <div
+                onClick={handleLogout}
+                style={{ color: "black", cursor: "pointer" }}
+              >
+                Logout
+              </div>
+            </a>
+          </li>
+        )}
         <li>
           <AccountMenu className={navStyles.pfp} />
         </li>

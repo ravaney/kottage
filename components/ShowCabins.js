@@ -1,7 +1,7 @@
 import { Card, CardMedia, CardContent, CardActionArea } from "@mui/material";
 import cardStyles from "../styles/ShowCabins.module.css";
 
-const ShowCabins = ({ images }) => {
+const ShowCabins = ({ images, properties }) => {
   return (
     <>
       <h3 className={cardStyles.heading}>Rent a room or the whole place</h3>
@@ -11,11 +11,7 @@ const ShowCabins = ({ images }) => {
           <div>
             <div className={cardStyles.description}>
               <h1>Fall Cabbin in Alaska</h1>
-              <p>
-                Beautiful cabin in Alaskan country side by a river. Quiet place
-                and abudance of nature ready to be explored by you and your
-                family
-              </p>
+              {/* <p>{data.description}</p> */}
             </div>
           </div>
         </div>

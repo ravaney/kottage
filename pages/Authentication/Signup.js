@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { emailRegex } from "../components/Utilities/validations";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../components/firebase";
+import { auth } from "../../components/firebase";
 import { ref, set } from "firebase/database";
-import { database } from "../components/firebase";
+import { database } from "../../components/firebase";
+import { emailRegex } from "../../components/Utilities/validations";
 
 const Signup = () => {
   const [fname, setFname] = useState("");
@@ -30,7 +30,7 @@ const Signup = () => {
     }
 
     if (!emailRegex.test(email)) {
-      errors.email = "invalid email";
+      errors.email = "Invalid email";
     }
     if (phone.length > 10) {
       errors.phone = "enter valid phone number including area code";
@@ -67,13 +67,22 @@ const Signup = () => {
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
-          setErrors({ email: errorMessage });
-
           console.log(errorMessage);
         });
+      clearFields();
     };
     createUserAccount();
   };
+  function clearFields() {
+    setAddress("");
+    setEmail("");
+    setFname("");
+    setLname("");
+    setPassword("");
+    setRepassword("");
+    setPhone("");
+  }
+
   //
 
   return (
@@ -119,22 +128,22 @@ const Signup = () => {
         >
           Email
         </label>
+
         <input
           required
           id="email"
           type="email"
           name="email"
-          placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
+
         <label
           htmlFor="password"
           name="password"
           id="password"
           style={{ display: "block" }}
         >
-          {<div style={{ color: "red" }}>{errors.email}</div>}
           Password
         </label>
         <input
@@ -145,6 +154,7 @@ const Signup = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
+
         <label
           htmlFor="repassword"
           name="repassword"
@@ -195,11 +205,7 @@ const Signup = () => {
           value={address}
           onChange={(e) => setAddress(e.target.value)}
         />
-        <button
-          type="submit"
-          style={{ display: "block" }}
-          // disabled={disableButton}
-        >
+        <button type="submit" style={{ display: "block" }}>
           Signup
         </button>
       </form>

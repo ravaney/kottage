@@ -2,8 +2,16 @@ import Head from "next/head";
 import Gallery from "../components/Gallery";
 import Search from "../components/Search";
 import ShowCabins from "../components/ShowCabins";
+import { useEffect } from "react";
+import { useAuth } from "../components/contexts/userContext";
 
-export default function Home({ images }) {
+export default function Home({ images, properties }) {
+  const { user } = useAuth();
+
+  useEffect(() => {
+    console.log("home");
+  }, [user]);
+
   return (
     <div>
       <Head>
@@ -18,7 +26,7 @@ export default function Home({ images }) {
       </Head>
       <Search />
       <Gallery images={images} />
-      <ShowCabins images={images} />
+      <ShowCabins images={images} properties={properties} />
     </div>
   );
   // to access html attributes, it can be accesses //from Head , attributes
@@ -31,10 +39,21 @@ export const getStaticProps = async () => {
     "https://jsonplaceholder.typicode.com/photos?_limit=4"
   );
   const images = await res.json();
+  // console.log(auth.currentUser);
+
+  //
+  // const userRef = ref(database, "users/" + auth.currentUser.uid);
+
+  // onValue(userRef, (snapshot) => {
+  //   const properties = snapshot.val();
+  //   console.log(properties);
+  // });
+  //
 
   return {
     props: {
       images,
+      // properties,
     },
   };
 };
