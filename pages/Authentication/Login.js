@@ -3,6 +3,7 @@ import { useState } from "react";
 // import { emailRegex } from "../components/Utilities/validations";
 import { useAuth } from "../../components/contexts/userContext";
 import { useRouter } from "next/router";
+import Link from "next/link";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
