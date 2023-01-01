@@ -25,6 +25,7 @@
   .nav ul li a {
     margin: 5px 15px;
     max-height: 50px;
+    color:black
   }
   .logo{
     width:auto !important;
