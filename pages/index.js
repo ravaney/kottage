@@ -39,20 +39,11 @@ export const getStaticProps = async () => {
     "https://jsonplaceholder.typicode.com/photos?_limit=4"
   );
   const images = await res.json();
-  // console.log(auth.currentUser);
-
-  //
-  // const userRef = ref(database, "users/" + auth.currentUser.uid);
-
-  // onValue(userRef, (snapshot) => {
-  //   const properties = snapshot.val();
-  //   console.log(properties);
-  // });
-  //
 
   return {
     props: {
       images,
+
       // properties,
     },
   };

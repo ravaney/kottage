@@ -23,36 +23,31 @@ const Nav = () => {
       <ul>
         <li>
           <Link href="/">
-            <a>
-              <img className={navStyles.logo} src="/blue.png" />
-            </a>
+            <img className={navStyles.logo} src="/blue.png" />
           </Link>
         </li>
         <li>
-          <Link href="/Properties">
-            <a>Properties</a>
-          </Link>
+          <Link href="/Properties">Properties</Link>
         </li>
       </ul>
       <ul style={{ margin: "0px", padding: "0px" }}>
         {!user ? (
           <li style={{ margin: "0px", padding: "0px" }}>
-            <Link href="/Authentication/Login">
-              <a>Login</a>
-            </Link>
+            <Link href="/Authentication/Login">Login </Link>
           </li>
         ) : (
-          <li>
-            <a>
-              <div style={{ color: "green" }}>Welcome {user?.email}</div>
-              <div
-                onClick={handleLogout}
-                style={{ color: "black", cursor: "pointer" }}
-              >
-                Logout
-              </div>
-            </a>
-          </li>
+          <div>
+            <div style={{ color: "green" }}>Welcome {user?.email} </div>
+            <li>
+              <Link href="/Account">Account</Link>
+            </li>
+            <div
+              onClick={handleLogout}
+              style={{ color: "black", cursor: "pointer" }}
+            >
+              Logout
+            </div>
+          </div>
         )}
         <li>
           <AccountMenu className={navStyles.pfp} />

@@ -3,12 +3,10 @@ import { useState } from "react";
 import { auth, database, storage } from "../components/firebase";
 import { ref, set } from "firebase/database";
 import { getDownloadURL, ref as ref2 } from "firebase/storage";
-import {
-  getStorage,
-  uploadBytesResumable,
-  ref as imgRef,
-} from "firebase/storage";
+import { uploadBytesResumable, ref as imgRef } from "firebase/storage";
 import { v4 } from "uuid"; // random id generator
+import { firestore } from "../components/firebase";
+import { setDoc, doc } from "firebase/firestore";
 
 const AddProperty = () => {
   const [propertyName, setPropertyName] = useState("");
@@ -16,25 +14,25 @@ const AddProperty = () => {
   const [rooms, setRooms] = useState("");
   const [images, setImages] = useState([]);
   const [description, setDescription] = useState("");
-  const [propertyId, setPropertyId] = useState("");
+  const [id, setId] = useState("");
   var time = Date.now();
 
   const submitForm = (e) => {
     e.preventDefault();
 
     const createProperty = async (values) => {
-      setPropertyId(v4);
+      console.log(id);
       set(
         ref(
           database,
           "users/" + auth.currentUser.uid + `/properties/ ${propertyName}`
         ),
         {
-          phone: phone,
-          rooms: rooms,
-          description: description,
-          property_name: propertyName,
-          property_id: propertyId,
+          Phone: phone,
+          Rooms: rooms,
+          Description: description,
+          Name: propertyName,
+          Id: id,
         }
       );
 
@@ -51,7 +49,7 @@ const AddProperty = () => {
         const imageName = v4() + "_" + image.name;
         const storageRef = ref2(
           storage,
-          "users/" + auth.currentUser.uid + `/${propertyId}/${imageName}`
+          "users/" + auth.currentUser.uid + `/${propertyName}/${imageName}`
         );
         const uploadTask = uploadBytesResumable(storageRef, image);
         uploadBytesResumable(storageRef, image).on(
@@ -59,8 +57,14 @@ const AddProperty = () => {
           (snapshot) => {},
           (err) => alert(err),
           () => {
-            getDownloadURL(uploadTask.snapshot.ref).then((imageUrl) => {
+            getDownloadURL(uploadTask.snapshot.ref).then(async (imageUrl) => {
               try {
+                await setDoc(
+                  doc(firestore, propertyName + "-" + id, imageName),
+                  {
+                    url: imageUrl,
+                  }
+                );
                 console.log("success");
               } catch (err) {
                 alert(err);
@@ -82,6 +86,9 @@ const AddProperty = () => {
     setPropertyName("");
     setRooms("");
   }
+  useEffect(() => {
+    setId(v4());
+  }, []);
   return (
     <>
       <form onSubmit={submitForm}>

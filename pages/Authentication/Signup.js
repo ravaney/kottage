@@ -57,6 +57,7 @@ const Signup = () => {
               phone: phone,
               email: email,
               address: address,
+              admin: false,
             });
 
             console.log("data written to db");
