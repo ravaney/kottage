@@ -1,35 +1,52 @@
 import { Card, CardMedia, CardContent, CardActionArea } from "@mui/material";
 import cardStyles from "../styles/ShowCabins.module.css";
+import { ref, get } from "firebase/database";
+import { useState, useEffect } from "react";
+import { database } from "./firebase";
 
-const ShowCabins = ({ images, properties }) => {
+const ShowCabins = ({ images }) => {
+  const usersRef = ref(database, "users");
+  const [allProperties, setAllProperties] = useState([]);
+
+  const getUsers = async () => (await get(usersRef)).val();
+
+  useEffect(() => {
+    getUsers().then((users) => {
+      setAllProperties(
+        Object.values(users).flatMap(({ properties }) =>
+          properties ? Object.values(properties) : []
+        )
+      );
+    });
+  }, [allProperties]);
   return (
     <>
       <h3 className={cardStyles.heading}>Rent a room or the whole place</h3>
       <div className={cardStyles.container}>
         <div className={cardStyles.album}>
-          <img className={cardStyles.img} src="yellowCabbin.jpg" />
+          <img className={cardStyles.img} src={allProperties[3]?.thumbnail} />
           <div>
             <div className={cardStyles.description}>
-              <h1>Fall Cabbin in Alaska</h1>
-              {/* <p>{data.description}</p> */}
+              <h1>{allProperties[3]?.Name}</h1>
+              <p>{allProperties[3]?.Description}</p>
             </div>
           </div>
         </div>
         <div className={cardStyles.album2}>
-          {images.map((image) => (
+          {allProperties.map((property) => (
             <Card
-              key={image.id}
+              key={property.Id}
               className={cardStyles.card}
               sx={{ maxWidth: 320, m: 1, p: 0 }}
             >
               <CardActionArea>
                 <CardMedia
-                  style={{ maxHeight: "14vh" }}
+                  style={{ maxHeight: "14vh", minHeight: "14vh" }}
                   className={cardStyles.img}
                   component="img"
-                  key={image.id}
-                  image={image.url}
-                  alt={image.id}
+                  key={property.Id}
+                  image={property?.thumbnail}
+                  alt={"Picture of Cottage"}
                 />
                 <CardContent>
                   <div
@@ -42,7 +59,7 @@ const ShowCabins = ({ images, properties }) => {
                     }}
                     className={cardStyles.description}
                   >
-                    <p>{image.id}</p>
+                    <p>{property.Name}</p>
                   </div>
                 </CardContent>
               </CardActionArea>

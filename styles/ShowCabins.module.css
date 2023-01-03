@@ -17,13 +17,12 @@
     max-width: 80vw;
     margin: auto;
     justify-content: center;
-    background-color: blueviolet;
+    /* background-color: blueviolet; */
 }
 .img{
     object-fit: cover;
     height: 100%;
     width: 100%;
-    /* overflow: hidden; */
 }
 
 .album{
@@ -40,14 +39,19 @@
     z-index: 1;
     object-fit: cover;
 }
+.album2::-webkit-scrollbar{
+    display: none;
+}
 .album2{
     display: flex;
     flex-wrap: wrap;
-    overflow: hidden;
+    overflow-x: "hidden";
+    overflow-y: scroll;
+    /* -ms-overflow-style: none;     */
+    /* scrollbar-width: none; */
     width: 50%;
     height: 100%;
     position: relative;
-    /* margin: auto !important; */
     align-items: center;
     justify-content: center;
     padding: 0px;
@@ -104,16 +108,20 @@
     }
     .album2{
         width: 100%;
+        overflow: hidden;
     }
     .card{
-        margin-top: 10px;
+        max-width: 24%;
+        margin:3px;
+        overflow:hidden
+
     }
     .heading{
         margin-left: 10px;
     }
 }
 
-@media only screen and (max-width:500px){
+@media only screen and (max-width:800px){
     
     .heading{
         margin: auto !important;
