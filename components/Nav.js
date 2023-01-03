@@ -23,7 +23,11 @@ const Nav = () => {
       <ul>
         <li>
           <Link href="/">
-            <img className={navStyles.logo} src="/blue.png" />
+            <img
+              className={navStyles.logo}
+              src="/blue.png"
+              style={{ cursor: "pointer" }}
+            />
           </Link>
         </li>
         <li>

@@ -14,12 +14,13 @@ const AddProperty = () => {
   const [rooms, setRooms] = useState("");
   const [images, setImages] = useState([]);
   const [description, setDescription] = useState("");
+  const [thumb, setThumbnail] = useState("");
+
   const [id, setId] = useState("");
   var time = Date.now();
 
   const submitForm = (e) => {
     e.preventDefault();
-
     const createProperty = async (values) => {
       console.log(id);
       set(
@@ -32,7 +33,8 @@ const AddProperty = () => {
           Rooms: rooms,
           Description: description,
           Name: propertyName,
-          Id: id,
+          Id: v4(),
+          thumbnail: thumb,
         }
       );
 
@@ -40,12 +42,10 @@ const AddProperty = () => {
 
       clearFields();
     };
-    createProperty();
 
     const addImages = async () => {
       console.log("inside upload images ");
       images.forEach((image) => {
-        console.log("property name oii" + propertyName);
         const imageName = v4() + "_" + image.name;
         const storageRef = ref2(
           storage,
@@ -59,6 +59,7 @@ const AddProperty = () => {
           () => {
             getDownloadURL(uploadTask.snapshot.ref).then(async (imageUrl) => {
               try {
+                setThumbnail(imageUrl);
                 await setDoc(
                   doc(firestore, propertyName + "-" + id, imageName),
                   {
@@ -75,6 +76,7 @@ const AddProperty = () => {
       });
     };
     addImages();
+    createProperty();
   };
 
   function onImageChange(images) {
@@ -86,9 +88,6 @@ const AddProperty = () => {
     setPropertyName("");
     setRooms("");
   }
-  useEffect(() => {
-    setId(v4());
-  }, []);
   return (
     <>
       <form onSubmit={submitForm}>
@@ -116,7 +115,10 @@ const AddProperty = () => {
           type="text"
           style={{ display: "block", height: "60px" }}
           value={description}
-          onChange={(e) => setDescription(e.target.value)}
+          onChange={(e) => {
+            setDescription(e.target.value);
+            setId(v4());
+          }}
         />
         <label htmlFor="rooms ">Rooms</label>
         <input
