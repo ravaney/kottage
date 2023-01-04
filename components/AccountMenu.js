@@ -34,10 +34,10 @@ export default function BasicPopover() {
         onClose={handleClose}
         anchorOrigin={{
           vertical: "bottom",
-          horizontal: "center",
+          horizontal: "left",
         }}
       >
-        <Typography sx={{ p: 2 }}>
+        <Typography sx={{ p: 0, m: 0 }}>
           <ul>
             <li>Login/Logout</li>
             <li>Account</li>

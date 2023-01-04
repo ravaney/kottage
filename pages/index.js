@@ -10,6 +10,7 @@ export default function Home({ images, properties }) {
 
   useEffect(() => {
     console.log("home");
+    console.log(user);
   }, [user]);
 
   return (
