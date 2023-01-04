@@ -1,38 +1,31 @@
-import { Card, CardMedia, CardContent, CardActionArea } from "@mui/material";
-import cardStyles from "../styles/ShowCabins.module.css";
-import { ref, get } from "firebase/database";
+import { AuthUserProvider, useAuth } from "./contexts/userContext";
 import { useState, useEffect } from "react";
-import { database } from "./firebase";
+import { ref, get } from "firebase/database";
+import { database } from "../components/firebase";
+import { Card, CardMedia, CardContent, CardActionArea } from "@mui/material";
 
-const ShowCabins = ({ images }) => {
-  const usersRef = ref(database, "users");
+export default function MyProperties() {
+  const { user } = useAuth();
+  const propertiesRef = ref(database, "users/" + user?.uid);
   const [allProperties, setAllProperties] = useState([]);
 
-  const getUsers = async () => (await get(usersRef)).val();
+  const getProperties = async () => (await get(propertiesRef)).val();
 
   useEffect(() => {
-    getUsers().then((users) => {
+    getProperties().then((User) => {
       setAllProperties(
-        Object.values(users).flatMap(({ properties }) =>
+        Object.values(User).flatMap(({ properties }) =>
           properties ? Object.values(properties) : []
         )
       );
     });
+    console.log(allProperties);
   }, []);
+
   return (
-    <>
-      <h3 className={cardStyles.heading}>Rent a room or the whole place</h3>
-      <div className={cardStyles.container}>
-        <div className={cardStyles.album}>
-          <img className={cardStyles.img} src={allProperties[3]?.thumbnail} />
-          <div>
-            <div className={cardStyles.description}>
-              <h1>{allProperties[3]?.Name}</h1>
-              <p>{allProperties[3]?.Description}</p>
-            </div>
-          </div>
-        </div>
-        <div className={cardStyles.album2}>
+    <AuthUserProvider>
+      <>
+        <div>
           {allProperties.map((property) => (
             <Card
               key={property.Id}
@@ -66,9 +59,7 @@ const ShowCabins = ({ images }) => {
             </Card>
           ))}
         </div>
-      </div>
-    </>
+      </>
+    </AuthUserProvider>
   );
-};
-
-export default ShowCabins;
+}

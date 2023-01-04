@@ -59,7 +59,8 @@ const AddProperty = () => {
           () => {
             getDownloadURL(uploadTask.snapshot.ref).then(async (imageUrl) => {
               try {
-                setThumbnail(imageUrl);
+                if (thumb == "") setThumbnail(imageUrl);
+                console.log("thumbnail " + thumb);
                 await setDoc(
                   doc(firestore, propertyName + "-" + id, imageName),
                   {
@@ -75,9 +76,9 @@ const AddProperty = () => {
         );
       });
     };
-    addImages();
-    createProperty();
+    addImages().then(createProperty());
   };
+  useEffect(() => {}, [thumb]);
 
   function onImageChange(images) {
     setImages([...images.target.files]);
