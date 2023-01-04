@@ -39,8 +39,6 @@ const AddProperty = () => {
       );
 
       console.log("data written to db");
-
-      clearFields();
     };
 
     const addImages = async () => {
@@ -82,12 +80,6 @@ const AddProperty = () => {
 
   function onImageChange(images) {
     setImages([...images.target.files]);
-  }
-
-  function clearFields() {
-    setPhone("");
-    setPropertyName("");
-    setRooms("");
   }
   return (
     <>
