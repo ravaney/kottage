@@ -4,7 +4,7 @@ import { auth } from "../../components/firebase";
 import { ref, set } from "firebase/database";
 import { database } from "../../components/firebase";
 import { emailRegex } from "../../components/Utilities/validations";
-
+import { useRouter } from "next/router";
 const Signup = () => {
   const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
@@ -13,11 +13,14 @@ const Signup = () => {
   const [address, setAddress] = useState("");
   const [password, setPassword] = useState("");
   const [repassword, setRepassword] = useState("");
+  const [loading, setLoading] = useState(false);
+
   const [errors, setErrors] = useState({
     email: "Invalid email",
     repassword: "Passwords do not match",
     password: "invalid Password",
   });
+  const router = useRouter();
 
   useEffect(() => {
     validate();
@@ -42,7 +45,7 @@ const Signup = () => {
   //
   const submitForm = (e) => {
     e.preventDefault();
-
+    setLoading(true);
     const createUserAccount = async (values) => {
       const response = await createUserWithEmailAndPassword(
         auth,
@@ -59,8 +62,8 @@ const Signup = () => {
               address: address,
               admin: false,
             });
-
             console.log("data written to db");
+            router.push("/");
           } else {
             console.log("empty uid");
           }
@@ -70,7 +73,8 @@ const Signup = () => {
           const errorMessage = error.message;
           console.log(errorMessage);
         });
-      clearFields();
+
+      setLoading(false);
     };
     createUserAccount();
   };
@@ -206,7 +210,7 @@ const Signup = () => {
           value={address}
           onChange={(e) => setAddress(e.target.value)}
         />
-        <button type="submit" style={{ display: "block" }}>
+        <button type="submit" style={{ display: "block" }} disabled={loading}>
           Signup
         </button>
       </form>

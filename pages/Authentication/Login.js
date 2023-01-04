@@ -30,21 +30,6 @@ const Login = () => {
   //   return errors;
   // };
 
-  // function login(email, password) {
-  //   return auth
-  //     .setPersistence(browserLocalPersistence)
-  //     .then(() => {
-  //       signInWithEmailAndPassword(auth, email, password).catch((error) => {
-  //         const errorCode = error.code;
-  //         const errorMessage = error.message;
-  //         console.log(error);
-  //       });
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // }
-
   const handleSubmit = async (e) => {
     // validate(e.values);
     e.preventDefault();
