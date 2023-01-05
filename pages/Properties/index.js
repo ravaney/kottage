@@ -44,6 +44,7 @@ const Properties = () => {
             display: "flex",
             flexWrap: "wrap",
             width: "100%",
+            justifyContent: "center",
           }}
         >
           {allProperties.map((property) => (
