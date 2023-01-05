@@ -45,6 +45,7 @@ const Properties = () => {
             flexWrap: "wrap",
             width: "100%",
             justifyContent: "center",
+            padding: "0px 10px 0px 10px",
           }}
         >
           {allProperties.map((property) => (
@@ -57,8 +58,8 @@ const Properties = () => {
               <CardActionArea>
                 <CardHeader title={property?.Name} />
                 <CardMedia
-                  style={{ maxHeight: "30vh", minHeight: "14vh" }}
-                  // className={cardStyles.img}
+                  style={{ maxHeight: "50vh", minHeight: "14vh" }}
+                  className={cardStyles.propertiesImg}
                   component="img"
                   key={property.Id}
                   image={property?.thumbnail}
@@ -74,7 +75,6 @@ const Properties = () => {
                       bottom: "-1rem",
                       height: "40px",
                     }}
-                    //className={cardStyles.description}
                   >
                     <Typography vaiant="body2" color="text.secondary">
                       {property?.Description}
