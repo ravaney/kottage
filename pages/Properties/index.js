@@ -51,13 +51,13 @@ const Properties = () => {
             <Card
               key={property.Id}
               className={cardStyles.propertiesCard}
-              sx={{ maxWidth: 320, m: 1, p: 2 }}
+              sx={{ maxWidth: 520, m: 1, p: 2 }}
               // style={{ width: "25vw" }}
             >
               <CardActionArea>
                 <CardHeader title={property?.Name} />
                 <CardMedia
-                  style={{ maxHeight: "14vh", minHeight: "14vh" }}
+                  style={{ maxHeight: "30vh", minHeight: "14vh" }}
                   // className={cardStyles.img}
                   component="img"
                   key={property.Id}
