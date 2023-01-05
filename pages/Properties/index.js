@@ -1,9 +1,5 @@
 import Head from "next/head";
-import Login from "../Authentication/Login";
-import AddProperty from "../../components/AddProperty";
-import { useEffect, useState } from "react";
 import cardStyles from "../../styles/ShowCabins.module.css";
-import { useRouter } from "next/router";
 import { ref, get } from "firebase/database";
 import { database } from "../../components/firebase";
 import {
@@ -13,25 +9,15 @@ import {
   CardActionArea,
   Typography,
 } from "@mui/material";
-
-import {
-  AuthUserProvider,
-  useAuth,
-} from "../../components/contexts/userContext";
+import { AuthUserProvider } from "../../components/contexts/userContext";
 import { CardHeader } from "@mui/material";
+import { useState, useEffect } from "react";
 
 const Properties = () => {
   const [allProperties, setAllProperties] = useState([]);
   const usersRef = ref(database, "users");
 
-  const router = useRouter();
-  const { user, loading } = useAuth();
   const getUsers = async () => (await get(usersRef)).val();
-
-  useEffect(() => {
-    console.log("properties home page " + user?.email);
-    console.log(user);
-  }, [user]);
 
   useEffect(() => {
     getUsers().then((users) => {
@@ -52,13 +38,20 @@ const Properties = () => {
         </Head>
         <h1>All Properties</h1>
 
-        <div style={{ display: "flex", flexWrap: "wrap" }}>
+        <div
+          // className={cardStyles.album2}
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            width: "100%",
+          }}
+        >
           {allProperties.map((property) => (
             <Card
               key={property.Id}
-              // className={cardStyles.card}
-              sx={{ maxWidth: 320, m: 1, p: 0 }}
-              style={{ width: "25vw" }}
+              className={cardStyles.propertiesCard}
+              sx={{ maxWidth: 320, m: 1, p: 2 }}
+              // style={{ width: "25vw" }}
             >
               <CardActionArea>
                 <CardHeader title={property?.Name} />
@@ -78,8 +71,9 @@ const Properties = () => {
                       padding: "0px",
                       textShadow: "none",
                       bottom: "-1rem",
+                      height: "40px",
                     }}
-                    // className={cardStyles.description}
+                    //className={cardStyles.description}
                   >
                     <Typography vaiant="body2" color="text.secondary">
                       {property?.Description}
