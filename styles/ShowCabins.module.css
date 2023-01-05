@@ -47,8 +47,6 @@
     flex-wrap: wrap;
     overflow-x: "hidden";
     overflow-y: scroll;
-    /* -ms-overflow-style: none;     */
-    /* scrollbar-width: none; */
     width: 50%;
     height: 100%;
     position: relative;
@@ -68,7 +66,7 @@
     background-color: white;
     border-color: white;
     border-radius: 0px;
-    max-width: 16vw;
+    /* max-width: 16vw; */
     margin-left: 10px;
     margin: 10px 10px 10px 10px;
     padding: 0px;
@@ -95,6 +93,22 @@
     padding-right: 5px;
 }
 
+.propertiesCard{
+    width: 100vw;
+    display: flex;
+    position: relative;
+    height: auto;
+    z-index: 2;
+    background-color: #faf9f6;
+    border-color: white;
+    border-radius: 0px;
+    /* max-width: 16vw; */
+    margin-left: 10px;
+    margin: 10px 10px 20px 10px; 
+    padding: 0px;
+    object-fit: cover;       
+}
+
 @media only screen and (max-width:1000px){
     .container{
         max-height: 50%;
@@ -107,6 +121,7 @@
         width: 100%;
     }
     .album2{
+        margin-top: 10px;
         width: 100%;
         overflow: hidden;
     }
@@ -143,6 +158,22 @@
     }
     
     
+}
+@media only screen and (max-width:1700px){
+    .card{
+        display:block;
+        max-width: 100vw;
+    }
+}
+
+@media only screen and (max-width:700px){
+    
+    .propertiesCard{
+            display: block;
+            max-width: 100vw;
+            margin: 0px 0px 20px 0px;
+            padding: 0px;
+    }
 }
 
 
