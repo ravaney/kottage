@@ -26,14 +26,14 @@ const AddProperty = () => {
       set(
         ref(
           database,
-          "users/" + auth.currentUser.uid + `/properties/ ${propertyName}`
+          "properties/" + auth.currentUser.uid + "/" + propertyName
         ),
         {
           Phone: phone,
           Rooms: rooms,
           Description: description,
           Name: propertyName,
-          Id: v4(),
+          Id: id,
           thumbnail: thumb,
         }
       );

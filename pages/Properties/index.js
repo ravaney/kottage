@@ -12,10 +12,13 @@ import {
 import { AuthUserProvider } from "../../components/contexts/userContext";
 import { CardHeader } from "@mui/material";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import Link from "next/link";
 
 const Properties = () => {
   const [allProperties, setAllProperties] = useState([]);
   const usersRef = ref(database, "users");
+  const router = useRouter();
 
   const getUsers = async () => (await get(usersRef)).val();
 
@@ -53,35 +56,41 @@ const Properties = () => {
               key={property.Id}
               className={cardStyles.propertiesCard}
               sx={{ maxWidth: 520, m: 1, p: 2 }}
-              // style={{ width: "25vw" }}
             >
-              <CardActionArea>
-                <CardHeader title={property?.Name} />
-                <CardMedia
-                  style={{ maxHeight: "50vh", minHeight: "14vh" }}
-                  className={cardStyles.propertiesImg}
-                  component="img"
-                  key={property.Id}
-                  image={property?.thumbnail}
-                  alt={"Picture of Cottage"}
-                />
-                <CardContent>
-                  <div
-                    style={{
-                      color: "black",
-                      margin: "0px",
-                      padding: "0px",
-                      textShadow: "none",
-                      bottom: "-1rem",
-                      height: "40px",
-                    }}
-                  >
-                    <Typography vaiant="body2" color="text.secondary">
-                      {property?.Description}
-                    </Typography>
-                  </div>
-                </CardContent>
-              </CardActionArea>
+              <Link
+                href={{
+                  pathname: "/Properties/" + property.Id,
+                  // query: { key: property.Id },
+                }}
+              >
+                <CardActionArea>
+                  <CardHeader title={property?.Name} />
+                  <CardMedia
+                    style={{ maxHeight: "50vh", minHeight: "14vh" }}
+                    className={cardStyles.propertiesImg}
+                    component="img"
+                    key={property.Id}
+                    image={property?.thumbnail}
+                    alt={"Picture of Cottage"}
+                  />
+                  <CardContent>
+                    <div
+                      style={{
+                        color: "black",
+                        margin: "0px",
+                        padding: "0px",
+                        textShadow: "none",
+                        bottom: "-1rem",
+                        height: "40px",
+                      }}
+                    >
+                      <Typography vaiant="body2" color="text.secondary">
+                        {property?.Description}
+                      </Typography>
+                    </div>
+                  </CardContent>
+                </CardActionArea>
+              </Link>
             </Card>
           ))}
         </div>
