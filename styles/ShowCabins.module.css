@@ -183,6 +183,7 @@
     .propertiesCard{
         display: block;
         max-width: 45vw !important;
+        padding: 0px !important;
     }
     .propertiesImg{
         height:25vh;

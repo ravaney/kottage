@@ -1,0 +1,73 @@
+.container{
+    max-width: 400px;
+    box-sizing: border-box;
+    padding: 25px;
+    display: block;
+    justify-content: space-between;
+}
+.price{
+    margin: 10px;
+    padding: 5px;
+    height: auto;
+    font-size: 32px;
+}
+
+.cal{
+    max-width: 50%;
+}
+.calContainer{
+    margin: 10px;
+    box-sizing: border-box;
+    padding: 5px;
+}
+.guest{
+    width: 100%;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+.search{
+    background-color: blue;
+    border-radius: 100px;
+    color:#ffff;
+    border-color: blue;
+    font-size: 14px;
+    white-space: normal;
+    font-weight: 700;
+    width: 50%;
+    box-shadow: none;
+    min-height: 48px; 
+    margin: 16px 25% 16px 25%;
+        
+}
+.search:hover{background: rgb(61, 96, 234);}
+.searchContainer{
+    font-size: 16px;
+    box-sizing: border-box;
+    margin: 10px;
+    width: 100%;
+    display: block;
+}
+.contact{
+    box-sizing: border-box;
+    display: flex;
+    margin: auto;
+    /* width:50%; */
+    font-size: 14px;
+    white-space: normal;
+    justify-content: center;
+}
+.property{
+    padding-top: 16px;
+    box-sizing: border-box;
+    display: flex;
+    margin: auto;
+    /* width:50%; */
+    font-size: 14px;
+    white-space: normal;
+    justify-content: center;
+}
+.note{
+    display: flex;
+    font-size: 0.875rem;
+
+}
