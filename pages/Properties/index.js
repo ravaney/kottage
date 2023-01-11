@@ -55,7 +55,7 @@ const Properties = () => {
             <Card
               key={property.Id}
               className={cardStyles.propertiesCard}
-              sx={{ maxWidth: 520, m: 1, p: 2 }}
+              sx={{ maxWidth: 420, m: 1, p: 2 }}
             >
               <Link href={"/Properties/" + property.Id} key={property.Id}>
                 <CardActionArea>
