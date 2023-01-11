@@ -1,4 +1,3 @@
-import Head from "next/head";
 import Gallery from "../components/Gallery";
 import Search from "../components/Search";
 import ShowCabins from "../components/ShowCabins";
@@ -22,9 +21,10 @@ export default function Home({ images, properties }) {
           integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
           crossOrigin="anonymous"
         />
-        <title>Kottage</title>
-        <meta name="keywords" content="web dev" lang="en" />
       </head>
+
+      <title>Kottage</title>
+      <meta name="keywords" content="web dev" lang="en" />
       <Search />
       <Gallery images={images} />
       <ShowCabins />

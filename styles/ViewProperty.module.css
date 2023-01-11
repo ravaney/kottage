@@ -40,7 +40,7 @@
     margin: auto;
     min-height: 48px !important; 
     padding: 16px 0px 16px 0px !important;
-    display: flex;
+    display: flex !important;
         
 }
 .searchButton:hover{background-color: #016d94 !important; 
