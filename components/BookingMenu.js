@@ -24,7 +24,7 @@ import alertOctagon from "react-useanimations/lib/alertOctagon";
 export default function BookingMenu() {
   const [startDate, setStartDate] = useState(dayjs());
   const [endDate, setEndDate] = useState(dayjs());
-  const [value, setValue] = useState("4");
+  const [value, setValue] = useState(4);
   const ratings = {
     1: "Poor",
     2: "Poor+",
