@@ -32,7 +32,7 @@ const ViewProperty = ({ property }) => {
           crossOrigin="anonymous"
         />
       </head>
-      <div style={{ display: "flex" }}>
+      <div style={{ display: "flex", marginTop: "10px" }}>
         <BigGallery images={photosUrl} />
 
         <BookingMenu />
