@@ -14,22 +14,22 @@ import { CardHeader } from "@mui/material";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
-
 const Properties = () => {
   const [allProperties, setAllProperties] = useState([]);
-  const usersRef = ref(database, "users");
+  const usersRef = ref(database, "properties");
+
   const router = useRouter();
 
   const getUsers = async () => (await get(usersRef)).val();
 
   useEffect(() => {
-    getUsers().then((users) => {
-      setAllProperties(
-        Object.values(users).flatMap(({ properties }) =>
-          properties ? Object.values(properties) : []
-        )
-      );
+    getUsers().then((properties) => {
+      setAllProperties(properties ? Object.values(properties) : []);
     });
+    allProperties.map((property) => {
+      console.log(property.Id);
+    });
+    console.log(typeof allProperties + " all properties");
   }, []);
 
   return (
@@ -57,12 +57,7 @@ const Properties = () => {
               className={cardStyles.propertiesCard}
               sx={{ maxWidth: 520, m: 1, p: 2 }}
             >
-              <Link
-                href={{
-                  pathname: "/Properties/" + property.Id,
-                  // query: { key: property.Id },
-                }}
-              >
+              <Link href={"/Properties/" + property.Id} key={property.Id}>
                 <CardActionArea>
                   <CardHeader title={property?.Name} />
                   <CardMedia

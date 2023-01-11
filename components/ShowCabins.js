@@ -3,20 +3,17 @@ import cardStyles from "../styles/ShowCabins.module.css";
 import { ref, get } from "firebase/database";
 import { useState, useEffect } from "react";
 import { database } from "./firebase";
+import Link from "next/link";
 
-const ShowCabins = ({ images }) => {
-  const usersRef = ref(database, "users");
+const ShowCabins = () => {
+  const propertiesRef = ref(database, "properties");
   const [allProperties, setAllProperties] = useState([]);
 
-  const getUsers = async () => (await get(usersRef)).val();
+  const getProperties = async () => (await get(propertiesRef)).val();
 
   useEffect(() => {
-    getUsers().then((users) => {
-      setAllProperties(
-        Object.values(users).flatMap(({ properties }) =>
-          properties ? Object.values(properties) : []
-        )
-      );
+    getProperties().then((properties) => {
+      setAllProperties(properties ? Object.values(properties) : []);
     });
   }, []);
   return (
@@ -39,30 +36,32 @@ const ShowCabins = ({ images }) => {
               className={cardStyles.card}
               sx={{ maxWidth: 320, m: 1, p: 0 }}
             >
-              <CardActionArea>
-                <CardMedia
-                  style={{ maxHeight: "14vh", minHeight: "14vh" }}
-                  className={cardStyles.img}
-                  component="img"
-                  key={property.Id}
-                  image={property?.thumbnail}
-                  alt={"Picture of Cottage"}
-                />
-                <CardContent>
-                  <div
-                    style={{
-                      color: "black",
-                      margin: "0px",
-                      padding: "0px",
-                      textShadow: "none",
-                      bottom: "-1rem",
-                    }}
-                    className={cardStyles.description}
-                  >
-                    <p>{property.Name}</p>
-                  </div>
-                </CardContent>
-              </CardActionArea>
+              <Link href={"/Properties/" + property.Id} key={property.Id}>
+                <CardActionArea>
+                  <CardMedia
+                    style={{ maxHeight: "14vh", minHeight: "14vh" }}
+                    className={cardStyles.img}
+                    component="img"
+                    key={property.Id}
+                    image={property?.thumbnail}
+                    alt={"Picture of Cottage"}
+                  />
+                  <CardContent>
+                    <div
+                      style={{
+                        color: "black",
+                        margin: "0px",
+                        padding: "0px",
+                        textShadow: "none",
+                        bottom: "-1rem",
+                      }}
+                      className={cardStyles.description}
+                    >
+                      <p>{property.Name}</p>
+                    </div>
+                  </CardContent>
+                </CardActionArea>
+              </Link>
             </Card>
           ))}
         </div>

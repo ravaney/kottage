@@ -15,7 +15,7 @@ export default function Home({ images, properties }) {
 
   return (
     <div>
-      <Head>
+      <head>
         <link
           rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
@@ -24,10 +24,10 @@ export default function Home({ images, properties }) {
         />
         <title>Kottage</title>
         <meta name="keywords" content="web dev" lang="en" />
-      </Head>
+      </head>
       <Search />
       <Gallery images={images} />
-      <ShowCabins images={images} properties={properties} />
+      <ShowCabins />
     </div>
   );
   // to access html attributes, it can be accesses //from Head , attributes

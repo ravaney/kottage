@@ -15,6 +15,7 @@ const AddProperty = () => {
   const [images, setImages] = useState([]);
   const [description, setDescription] = useState("");
   const [thumb, setThumbnail] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const [id, setId] = useState("");
   var time = Date.now();
@@ -23,22 +24,18 @@ const AddProperty = () => {
     e.preventDefault();
     const createProperty = async (values) => {
       console.log(id);
-      set(
-        ref(
-          database,
-          "properties/" + auth.currentUser.uid + "/" + propertyName
-        ),
-        {
-          Phone: phone,
-          Rooms: rooms,
-          Description: description,
-          Name: propertyName,
-          Id: id,
-          thumbnail: thumb,
-        }
-      );
+      set(ref(database, "properties/" + id), {
+        Phone: phone,
+        Rooms: rooms,
+        Description: description,
+        Name: propertyName,
+        Id: id,
+        thumbnail: thumb,
+        OwnerId: auth.currentUser.uid,
+      });
 
       console.log("data written to db");
+      setLoading(true);
     };
 
     const addImages = async () => {
@@ -57,7 +54,7 @@ const AddProperty = () => {
           () => {
             getDownloadURL(uploadTask.snapshot.ref).then(async (imageUrl) => {
               try {
-                if (thumb == "") setThumbnail(imageUrl);
+                setThumbnail(imageUrl);
                 console.log("thumbnail " + thumb);
                 await setDoc(
                   doc(firestore, propertyName + "-" + id, imageName),
@@ -66,6 +63,7 @@ const AddProperty = () => {
                   }
                 );
                 console.log("success");
+                setLoading(false);
               } catch (err) {
                 alert(err);
               }
@@ -73,6 +71,7 @@ const AddProperty = () => {
           }
         );
       });
+      setThumbnail("");
     };
     addImages().then(createProperty());
   };
@@ -90,7 +89,10 @@ const AddProperty = () => {
           id="property_name"
           style={{ display: "block" }}
           value={propertyName}
-          onChange={(e) => setPropertyName(e.target.value)}
+          onChange={(e) => {
+            setPropertyName(e.target.value);
+            setId(v4());
+          }}
         />
         <label htmlFor="phone ">Phone</label>
         <input
@@ -110,7 +112,6 @@ const AddProperty = () => {
           value={description}
           onChange={(e) => {
             setDescription(e.target.value);
-            setId(v4());
           }}
         />
         <label htmlFor="rooms ">Rooms</label>
@@ -133,6 +134,7 @@ const AddProperty = () => {
         />
         <button
           type="submit"
+          disabled={loading}
           style={{ display: "block", marginBottom: "20px" }}
         >
           Submit
