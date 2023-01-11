@@ -34,10 +34,9 @@
     border-color: blue;
     font-size: 14px !important;
     white-space: normal;
-    font-weight: 700;
     width: 50% !important;
     box-shadow: none;
-    margin: auto;
+    margin: auto !important;
     min-height: 48px !important; 
     padding: 16px 0px 16px 0px !important;
     display: flex !important;
