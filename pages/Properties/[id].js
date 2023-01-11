@@ -6,6 +6,7 @@ import { database } from "../../components/firebase";
 import PropertyStyles from "../../styles/ViewProperty.module.css";
 import { collection, query, getDocs } from "firebase/firestore";
 import { firestore } from "../../components/firebase";
+import propertyStyles from "../../styles/ShowCabins.module.css";
 
 const ViewProperty = ({ property }) => {
   const [photosUrl, setPhotosUrl] = useState([]);
@@ -32,7 +33,7 @@ const ViewProperty = ({ property }) => {
           crossOrigin="anonymous"
         />
       </head>
-      <div style={{ display: "flex", marginTop: "10px" }}>
+      <div className={propertyStyles.topContainer}>
         <BigGallery images={photosUrl} />
 
         <BookingMenu />
