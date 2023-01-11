@@ -1,16 +1,40 @@
 import { get, ref } from "firebase/database";
-import React from "react";
+import React, { useState, useEffect } from "react";
+import BigGallery from "../../components/BigGallery";
 import BookingMenu from "../../components/BookingMenu";
 import { database } from "../../components/firebase";
 import PropertyStyles from "../../styles/ViewProperty.module.css";
-import { useState } from "react";
+import { collection, query, getDocs } from "firebase/firestore";
+import { firestore } from "../../components/firebase";
 
-const ViewProperty = (props) => {
-  const [allProperties, setAllProperties] = useState();
+const ViewProperty = ({ property }) => {
+  const [photosUrl, setPhotosUrl] = useState([]);
+  const photosCollection = property.Name + "-" + property.Id;
+  console.log(photosCollection);
+
+  const photosCollectionRef = collection(firestore, photosCollection);
+
+  useEffect(() => {
+    const getPhotos = async () => {
+      const data = await getDocs(photosCollectionRef);
+      setPhotosUrl(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    };
+    getPhotos();
+  }, []);
+
   return (
     <>
+      <head>
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+          crossOrigin="anonymous"
+        />
+      </head>
       <div style={{ display: "flex" }}>
-        <div className={PropertyStyles.album}>Property id {props.id}</div>
+        <BigGallery images={photosUrl} />
+
         <BookingMenu />
       </div>
     </>
@@ -18,18 +42,39 @@ const ViewProperty = (props) => {
 };
 
 export default ViewProperty;
-export async function getServerSideProps(context) {
-  console.log("hello" + context.query);
-  return {
-    props: {
-      id: context.query.id,
-    },
-  };
-}
 
-// export const getStaticPaths = async () => {
-//   const propertyRef = ref(database, "properties");
-//   await get(propertyRef)
-//     .val()
-//     .then((test) => console.log());
-// };
+export const getStaticPaths = async () => {
+  const propertyRef = ref(database, "properties");
+  const allProperties = [];
+  const getProperties = async () => (await get(propertyRef)).val();
+
+  getProperties().then((properties) => {
+    allProperties.push[properties ? Object.values(properties) : []];
+  });
+
+  const paths = allProperties.map((property) => {
+    return {
+      params: { id: property.Id.toString() },
+    };
+  });
+
+  return {
+    paths,
+    fallback: "blocking",
+  };
+};
+
+export const getStaticProps = async (context) => {
+  console.log(context);
+  const propertyRef = ref(database, "properties/" + context.params.id);
+  const getProperties = async () => (await get(propertyRef)).val();
+
+  const data = await getProperties();
+  const property = await data;
+  console.log(property);
+
+  if (!property) return { notFound: true };
+  return {
+    props: { property },
+  };
+};

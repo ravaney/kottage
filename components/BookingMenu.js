@@ -77,23 +77,27 @@ export default function BookingMenu() {
           </LocalizationProvider>
         </div>
         <div className={PropertyStyles.searchContainer}>
-          <IconButton aria-label="search" className={PropertyStyles.search}>
+          <IconButton
+            aria-label="search"
+            className={PropertyStyles.searchButton}
+          >
             Check availability
           </IconButton>
-
-          <Typography
-            style={{
-              fontSize: ".875rem",
-              display: "flex",
-              margin: "0px 0px 16px 0px",
-            }}
-          >
-            <HelpCenterIcon style={{ color: "red" }} />
-            <span>
-              <b>Free cancellation</b> up to{" "}
-              <span style={{ color: "blue" }}>14 days before check-in</span>
-            </span>
-          </Typography>
+          <div className={PropertyStyles.note}>
+            <Typography
+              style={{
+                fontSize: ".875rem",
+                display: "flex",
+                // margin: "0px 0px 16px 0px",
+              }}
+            >
+              <HelpCenterIcon style={{ color: "red" }} />
+              <span>
+                <b>Free cancellation</b> up to{" "}
+                <span style={{ color: "blue" }}>14 days before check-in</span>
+              </span>
+            </Typography>
+          </div>
           <div
             style={{
               borderTop: "1px solid grey",
