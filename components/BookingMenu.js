@@ -3,6 +3,7 @@ import {
   Typography,
   InputAdornment,
   IconButton,
+  Rating,
 } from "@mui/material";
 import { InfoOutlined } from "@mui/icons-material";
 import { DatePicker } from "@mui/x-date-pickers";
@@ -14,24 +15,66 @@ import React from "react";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import PropertyStyles from "../styles/ViewProperty.module.css";
 import HelpCenterIcon from "@mui/icons-material/HelpCenter";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import { Box, getValue } from "@mui/system";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import UseAnimations from "react-useanimations";
+import alertOctagon from "react-useanimations/lib/alertOctagon";
 
 export default function BookingMenu() {
   const [startDate, setStartDate] = useState(dayjs());
   const [endDate, setEndDate] = useState(dayjs());
-  const [value, setValue] = useState();
+  const [value, setValue] = useState("4");
+  const ratings = {
+    1: "Poor",
+    2: "Poor+",
+    3: "Good",
+    4: "Good",
+    5: "Excellent!",
+  };
+
+  console.log(ratings[4]);
 
   return (
     <>
       <div className={PropertyStyles.container}>
         <div className={PropertyStyles.price}>
+          <IconButton
+            aria-label="save to favourites"
+            style={{ margin: "0% 0% 0% 90%", color: "hotpink" }}
+          >
+            <FavoriteBorderIcon fontSize="large" />
+          </IconButton>
+
           <Typography>
             <span style={{ fontSize: "32px" }}>$300</span>{" "}
             <span style={{ lineHeight: "50%", fontSize: "14px" }}>
               avg/night
             </span>
           </Typography>
+          <div style={{ display: "flex", margin: "0px" }}>
+            <Rating
+              name="controlled"
+              value={value}
+              onChange={(e, newValue) => setValue(newValue)}
+              defaultValue={4}
+              readOnly
+              precision={1}
+              icon={
+                <FavoriteIcon fontSize="inherit" style={{ color: "hotpink" }} />
+              }
+              emptyIcon={<FavoriteIcon fontSize="inherit" />}
+            />
+            <Box sx={{ m1: 2, fontSize: 16, marginLeft: "5px" }}>
+              <a style={{ color: "blue", marginRight: "30px" }}>(14 reviews)</a>
+
+              <b style={{ color: "black" }}>{ratings[value]}</b>
+            </Box>
+          </div>
+
           <div style={{ display: "flex", marginTop: "32px" }}>
             <InfoOutlined style={{ color: "red" }} />
+            {/* <UseAnimations animation={alertOctagon} size={40} /> */}
             <span style={{ fontSize: "16px" }}>
               Add dates for total pricing
             </span>
@@ -78,7 +121,7 @@ export default function BookingMenu() {
         </div>
         <div className={PropertyStyles.searchContainer}>
           <IconButton
-            aria-label="search"
+            aria-label="Check Availability button"
             className={PropertyStyles.searchButton}
           >
             Check availability
