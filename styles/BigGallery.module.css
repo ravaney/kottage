@@ -11,6 +11,7 @@
     /* border: 1px solid grey; */
     margin: 0px 10px 0px 10px;
     object-fit: cover;
+    min-width: 400px;
 
 
 }
