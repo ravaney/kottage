@@ -1,15 +1,18 @@
 .container{
     max-width: 30vw;
     box-sizing: border-box;
-    padding: 25px;
+    padding: 0px 25px 25px 25px;
     display: block;
     justify-content: space-between;
-    border: 1px solid grey;
-    height: 60vh;
+    /* border: 1px solid grey; */
+    border-bottom: white;
+    max-height: 1000vh;
+    position: sticky;
+    position: -webkit-sticky-
 }
 .price{
-    margin: 10px;
-    padding: 5px;
+    margin: 0px 10px 10px 10px;
+    padding: 0px 5px 5px 5px;
     height: auto;
     font-size: 32px;
 }
