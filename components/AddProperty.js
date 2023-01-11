@@ -53,9 +53,9 @@ const AddProperty = () => {
           (err) => alert(err),
           () => {
             getDownloadURL(uploadTask.snapshot.ref).then(async (imageUrl) => {
+              setThumbnail(imageUrl);
+              console.log("thumbnail " + thumb);
               try {
-                setThumbnail(imageUrl);
-                console.log("thumbnail " + thumb);
                 await setDoc(
                   doc(firestore, propertyName + "-" + id, imageName),
                   {
@@ -71,11 +71,12 @@ const AddProperty = () => {
           }
         );
       });
-      setThumbnail("");
     };
     addImages().then(createProperty());
   };
-  useEffect(() => {}, [thumb]);
+  useEffect(() => {
+    console.log(thumb);
+  }, [thumb]);
 
   function onImageChange(images) {
     setImages([...images.target.files]);
