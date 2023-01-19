@@ -8,7 +8,7 @@ import {
 import { InfoOutlined } from "@mui/icons-material";
 import { DatePicker } from "@mui/x-date-pickers";
 import dayjs from "dayjs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import React from "react";
@@ -20,31 +20,70 @@ import { Box, getValue } from "@mui/system";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import UseAnimations from "react-useanimations";
 import alertOctagon from "react-useanimations/lib/alertOctagon";
+import { ref, get } from "firebase/database";
+import { database } from "./firebase";
 
-export default function BookingMenu() {
+export default function BookingMenu({ property }) {
   const [startDate, setStartDate] = useState(dayjs());
   const [endDate, setEndDate] = useState(dayjs());
-  const [value, setValue] = useState(4);
+  const [avgRating, setAvgRating] = useState(0);
+  const [weights, setWeights] = useState([]);
+  const [values, setValues] = useState([]);
   const ratings = {
-    1: "Poor",
+    1: "Very Poor",
     2: "Poor+",
-    3: "Good",
+    3: "Ok",
     4: "Good",
     5: "Excellent!",
   };
 
-  console.log(ratings[4]);
+  const getAvgRef = ref(
+    database,
+    "ratings/" + "ce31b1be-656e-42bc-a44d-75f20230466a"
+  );
+
+  useEffect(() => {
+    const getAllRatings = async () => await await (await get(getAvgRef)).val();
+    getAllRatings().then((ratings) => {
+      setWeights(ratings ? Object.values(ratings) : []);
+    });
+    calculateAvgRating();
+    const i = 3;
+    // console.log(Object.values(weights));
+  }, []);
+
+  const calculateAvgRating = () => {
+    const sum = 0;
+    9;
+    console.log(
+      weights.forEach((w) => {
+        console.log(w);
+      })
+    );
+  };
 
   return (
     <>
       <div className={PropertyStyles.container}>
         <div className={PropertyStyles.price}>
-          <IconButton
-            aria-label="save to favourites"
-            style={{ margin: "0% 0% 0% 90%", color: "hotpink" }}
+          <Typography
+            variant="h5"
+            style={{
+              justifyContent: "space-between",
+              // textAlign: "center",
+              alignItems: "center",
+              display: "flex",
+              color: "hotpink",
+            }}
           >
-            <FavoriteBorderIcon fontSize="large" />
-          </IconButton>
+            {property?.Name}
+            <IconButton
+              aria-label="save to favourites"
+              style={{ margin: "0% 0% 0% 0%", color: "hotpink" }}
+            >
+              <FavoriteBorderIcon fontSize="large" />
+            </IconButton>
+          </Typography>
 
           <Typography>
             <span style={{ fontSize: "32px" }}>$300</span>{" "}
@@ -55,8 +94,7 @@ export default function BookingMenu() {
           <div style={{ display: "flex", margin: "0px" }}>
             <Rating
               name="controlled"
-              value={value}
-              onChange={(e, newValue) => setValue(newValue)}
+              value={property?.Rating}
               defaultValue={4}
               readOnly
               precision={1}
@@ -67,8 +105,6 @@ export default function BookingMenu() {
             />
             <Box sx={{ m1: 2, fontSize: 16, marginLeft: "5px" }}>
               <a style={{ color: "blue", marginRight: "30px" }}>(14 reviews)</a>
-
-              <b style={{ color: "black" }}>{ratings[value]}</b>
             </Box>
           </div>
 
@@ -124,7 +160,7 @@ export default function BookingMenu() {
             aria-label="Check Availability button"
             className={PropertyStyles.searchButton}
           >
-            Check availability
+            Book property
           </IconButton>
           <div className={PropertyStyles.note}>
             <Typography
@@ -154,7 +190,7 @@ export default function BookingMenu() {
             </Typography>
           </div>
           <Typography className={PropertyStyles.property}>
-            <b>Property #</b>
+            <b>Property # {property.Id}</b>
           </Typography>
         </div>
       </div>

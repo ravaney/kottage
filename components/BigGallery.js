@@ -1,12 +1,12 @@
 import galleryStyles from "../styles/BigGallery.module.css";
 import Carousel from "react-bootstrap/Carousel";
 const BigGallery = ({ images }) => {
-  console.log(images);
   return (
     <>
       <Carousel
         interval={8000}
         // variant="dark"
+        controls="false"
         className={galleryStyles.carousel}
       >
         {images.map((image) => (

@@ -20,7 +20,7 @@ const Nav = () => {
 
   return (
     <nav className={navStyles.nav}>
-      <ul>
+      <ul style={{ margin: "0px" }}>
         <li>
           <Link href="/">
             <img
@@ -36,12 +36,14 @@ const Nav = () => {
       </ul>
       <ul style={{ margin: "0px", padding: "0px" }}>
         {!user ? (
-          <li style={{ margin: "0px", padding: "0px" }}>
-            <Link href="/Authentication/Login">Login </Link>
-          </li>
+          <ul>
+            <li style={{ margin: "0px", padding: "0px" }}>
+              <Link href="/Authentication/Login">Login </Link>
+            </li>
+          </ul>
         ) : (
-          <div>
-            <div style={{ color: "green" }}>Welcome {user?.email} </div>
+          <ul>
+            <div style={{ color: "green" }}>Welcome {user?.displayName} ! </div>
             <li>
               <Link href="/Account">Account</Link>
             </li>
@@ -51,7 +53,7 @@ const Nav = () => {
             >
               Logout
             </div>
-          </div>
+          </ul>
         )}
         <li style={{ margin: "0px" }}>
           <AccountMenu className={navStyles.pfp} />

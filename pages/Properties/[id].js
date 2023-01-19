@@ -2,18 +2,25 @@ import { get, ref } from "firebase/database";
 import React, { useState, useEffect } from "react";
 import BigGallery from "../../components/BigGallery";
 import BookingMenu from "../../components/BookingMenu";
-import { database } from "../../components/firebase";
 import PropertyStyles from "../../styles/ViewProperty.module.css";
-import { collection, query, getDocs } from "firebase/firestore";
-import { firestore } from "../../components/firebase";
+import { collection, getDocs } from "firebase/firestore";
+import { firestore, database } from "../../components/firebase";
 import propertyStyles from "../../styles/ShowCabins.module.css";
+import "bootstrap/dist/css/bootstrap.css";
+import { Box } from "@mui/system";
+import { Grid } from "@mui/material";
+import PropertyNav from "../../components/PropertyNav";
+import AboutProperty from "../../components/AboutProperty";
+import Policy from "../../components/Policy";
 
 const ViewProperty = ({ property }) => {
   const [photosUrl, setPhotosUrl] = useState([]);
+
   const photosCollection = property.Name + "-" + property.Id;
-  console.log(photosCollection);
+  console.log(property?.Rating + " rating");
 
   const photosCollectionRef = collection(firestore, photosCollection);
+  const heartsRef = ref(database, "properties/" + property?.Id + "/rating");
 
   useEffect(() => {
     const getPhotos = async () => {
@@ -25,18 +32,15 @@ const ViewProperty = ({ property }) => {
 
   return (
     <>
-      <head>
-        <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
-          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
-          crossOrigin="anonymous"
-        />
-      </head>
       <div className={propertyStyles.topContainer}>
-        <BigGallery images={photosUrl} />
+        <Grid style={{ display: "block" }}>
+          <BigGallery images={photosUrl} />
+          <PropertyNav />
+          <AboutProperty property={property} />
+          <Policy />
+        </Grid>
 
-        <BookingMenu />
+        <BookingMenu property={property} />
       </div>
     </>
   );
@@ -55,7 +59,9 @@ export const getStaticPaths = async () => {
 
   const paths = allProperties.map((property) => {
     return {
-      params: { id: property.Id.toString() },
+      params: {
+        id: property.Id.toString(),
+      },
     };
   });
 
@@ -71,8 +77,8 @@ export const getStaticProps = async (context) => {
   const getProperties = async () => (await get(propertyRef)).val();
 
   const data = await getProperties();
-  const property = await data;
-  console.log(property);
+  const property = data;
+  console.log(data);
 
   if (!property) return { notFound: true };
   return {

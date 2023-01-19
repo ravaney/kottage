@@ -5,7 +5,6 @@ import {
 } from "firebase/auth";
 import { createContext, useContext, useEffect, useState } from "react";
 import { auth } from "../firebase";
-
 const authUserContext = createContext({});
 
 export const AuthUserProvider = ({ children }) => {
@@ -20,7 +19,6 @@ export const AuthUserProvider = ({ children }) => {
           email: user.email,
           displayName: user.displayName,
         });
-        console.log("user info set " + user.email);
       } else {
         setUser(null);
       }

@@ -1,7 +1,8 @@
 .carousel{
     max-width: 70vw;
     width:70vw;
-    height: 60vh;
+    /* height: auto; */
+    max-height: 60vh;
     position: relative;
     overflow: hidden;
     justify-content:center;
