@@ -1,16 +1,21 @@
 import Gallery from "../components/Gallery";
 import Search from "../components/Search";
 import ShowCabins from "../components/ShowCabins";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../components/contexts/userContext";
 import "bootstrap/dist/css/bootstrap.css";
+import About from "../components/About";
 export default function Home({ images, properties }) {
   const { user } = useAuth();
+  const [modal, setModal] = useState(false);
 
   useEffect(() => {
     console.log("home");
     console.log(user);
   }, [user]);
+  useEffect(() => {
+    setModal(true);
+  });
 
   return (
     <div>
@@ -19,6 +24,7 @@ export default function Home({ images, properties }) {
       <Search />
       <Gallery images={images} />
       <ShowCabins />
+      {modal == true ? <About /> : null}
     </div>
   );
   // to access html attributes, it can be accesses //from Head , attributes
