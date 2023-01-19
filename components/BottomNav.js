@@ -10,7 +10,7 @@ const Nav = () => {
     <nav className={navStyles.nav}>
       <ul>
         <li>
-          <Link href="/">About</Link>
+          <Link href="">About</Link>
         </li>
       </ul>
       <ul>

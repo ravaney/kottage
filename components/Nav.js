@@ -20,7 +20,7 @@ const Nav = () => {
 
   return (
     <nav className={navStyles.nav}>
-      <ul style={{ margin: "0px" }}>
+      <ul style={{ margin: "0px", paddingLeft: "10px" }}>
         <li>
           <Link href="/">
             <img
