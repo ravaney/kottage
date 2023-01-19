@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import AddProperty from "../../components/AddProperty";
 import { useAuth } from "../../components/contexts/userContext";
 import MyProperties from "../../components/MyProperties";
+import UpdateProperty from "../../components/UpdateProperty";
+import Reviews from "../../components/Reviews";
 
 export default function Dashboard() {
   const { user } = useAuth();
@@ -11,6 +13,7 @@ export default function Dashboard() {
   const [allProperties, setAllProperties] = useState([]);
   const [addPropertyShown, setaddPropertyShown] = useState(false);
   const [myPropertyShown, setMyPropertyShown] = useState(false);
+  const [updateShown, setUpdateShown] = useState(false);
   const getUser = async () => (await get(usersRef)).val();
 
   // useEffect(() => {
@@ -32,14 +35,21 @@ export default function Dashboard() {
   const handleMPS = (e) => {
     setMyPropertyShown((current) => !current);
   };
+  const handleShowUpdate = (e) => {
+    setUpdateShown((current) => !current);
+  };
 
   return (
     <>
       <div style={{ padding: 10 }}>My Account </div>
+      <div> Testing All account features here</div>
       <button onClick={handleShowAddProp}>Add Property</button>
       {addPropertyShown && <AddProperty />}
       <button onClick={handleMPS}>My properties</button>
       {myPropertyShown && <MyProperties />}
+      <button onClick={handleShowUpdate}>Update Property</button>
+      {updateShown && <UpdateProperty />}
+      <Reviews />
     </>
   );
 }
