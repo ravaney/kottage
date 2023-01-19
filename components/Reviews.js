@@ -7,7 +7,7 @@ import { useAuth } from "./contexts/userContext";
 import { ref, set } from "firebase/database";
 import { v4 } from "uuid";
 import "firebase/database";
-import TextArea from "antd/es/input/TextArea";
+import { Input } from "antd";
 
 export default function Reviews() {
   const [review, setReview] = useState("");
@@ -16,6 +16,7 @@ export default function Reviews() {
   const [reviewId, setReviewId] = useState("");
   const currentDate = new Date();
   const [loading, setLoading] = useState(false);
+  const { TextArea } = Input;
 
   const handleSubmit = (e) => {
     e.preventDefault();
