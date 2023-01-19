@@ -7,6 +7,7 @@ import { uploadBytesResumable, ref as imgRef } from "firebase/storage";
 import { v4 } from "uuid"; // random id generator
 import { firestore } from "../components/firebase";
 import { setDoc, doc } from "firebase/firestore";
+import { Input } from "antd";
 
 const AddProperty = () => {
   const [propertyName, setPropertyName] = useState("");
@@ -16,12 +17,14 @@ const AddProperty = () => {
   const [description, setDescription] = useState("");
   const [thumb, setThumbnail] = useState("");
   const [loading, setLoading] = useState(false);
+  const { TextArea } = Input;
 
   const [id, setId] = useState("");
   var time = Date.now();
 
   const submitForm = (e) => {
     e.preventDefault();
+
     const createProperty = async (values) => {
       console.log(id);
       set(ref(database, "properties/" + id), {
@@ -33,9 +36,14 @@ const AddProperty = () => {
         thumbnail: thumb,
         OwnerId: auth.currentUser.uid,
       });
+      for (var i = 1; i <= 5; i++) {
+        set(ref(database, "ratings/" + id + "/" + i.toString() + "_Star"), {
+          [i.toString() + "_Star"]: 0,
+        });
+      }
 
       console.log("data written to db");
-      setLoading(true);
+      setLoading(false);
     };
 
     const addImages = async () => {
@@ -105,7 +113,7 @@ const AddProperty = () => {
           onChange={(e) => setPhone(e.target.value)}
         />
         <label htmlFor="description ">Short Description</label>
-        <textarea
+        <TextArea
           required
           id="description"
           type="text"

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../../components/firebase";
 import { ref, set } from "firebase/database";
 import { database } from "../../components/firebase";
@@ -52,6 +52,7 @@ const Signup = () => {
         email,
         password
       )
+        .then(updateProfile(auth.currentUser, { displayName: fname }))
         .then((user) => {
           if (auth.currentUser.uid !== null) {
             set(ref(database, "users/" + auth.currentUser.uid), {
@@ -68,6 +69,8 @@ const Signup = () => {
             console.log("empty uid");
           }
         })
+        .then(updateProfile(auth.currentUser, { displayName: fname }))
+
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;

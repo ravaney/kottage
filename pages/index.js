@@ -3,7 +3,7 @@ import Search from "../components/Search";
 import ShowCabins from "../components/ShowCabins";
 import { useEffect } from "react";
 import { useAuth } from "../components/contexts/userContext";
-
+import "bootstrap/dist/css/bootstrap.css";
 export default function Home({ images, properties }) {
   const { user } = useAuth();
 
@@ -14,15 +14,6 @@ export default function Home({ images, properties }) {
 
   return (
     <div>
-      <head>
-        <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
-          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
-          crossOrigin="anonymous"
-        />
-      </head>
-
       <title>Kottage</title>
       <meta name="keywords" content="web dev" lang="en" />
       <Search />
