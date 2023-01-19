@@ -1,6 +1,5 @@
 .headings{
-    width:auto;
-    padding:25px 25px 25px;
-    margin: 0px 10px;
+    padding:25px 25px 25px !important;
+    margin: 0px 10px !important;
     border-bottom: 1px solid gray;
 }
