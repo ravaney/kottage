@@ -58,11 +58,11 @@
 .contact{
     box-sizing: border-box;
     display: flex;
-    margin: auto;
+    margin: auto !important;
     /* width:50%; */
     font-size: 14px;
     white-space: normal;
-    justify-content: center;
+    justify-content: center ;
 }
 .property{
     padding: 16px 0px 16px 0px;
