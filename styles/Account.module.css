@@ -1,0 +1,52 @@
+.sidebarContainer{
+    background-color: #0679A2 ;
+    padding:0px;
+    height:100vh;
+    padding-top: 20px;
+    width: 20vw;
+    /* max-width: 40vw; */
+    /* display: block; */
+    margin-left: 0px;
+}
+.sideButtons{
+    padding:20px 0px 20px 0px;
+    display: flex;
+    justify-content:flex-start;
+    align-items:flex-start;
+    color: white;
+    width: 100%;
+    border-radius: 0;
+}
+
+.sideButtons:hover{
+    color:#002330 ;
+    border:1px solid white
+}
+.avatar{
+    margin:auto;
+    height: 100px;
+    width: 100px;
+}
+.name{
+    margin:20px;
+    padding: 20px;
+    display: flex;
+    color: white;
+    justify-content: center;
+    border-bottom: 1px solid #00B1F2;
+}
+.icon{
+    margin-right: 20px;
+    margin-left: 20px;
+    color: #00B1F2 !important
+
+}
+
+
+@media only screen and (max-width:1024px){
+    .sidebarContainer{
+        width: 30vw;
+        max-width: 30vw;
+        min-width: 25vw;
+    }
+}
