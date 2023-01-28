@@ -32,7 +32,6 @@ const AddProperty = () => {
         Rooms: rooms,
         Description: description,
         Name: propertyName,
-        Id: id,
         thumbnail: thumb,
         OwnerId: auth.currentUser.uid,
       });
