@@ -14,6 +14,7 @@ import { CardHeader } from "@mui/material";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
+
 const Properties = () => {
   const [allProperties, setAllProperties] = useState([]);
   const usersRef = ref(database, "properties");
@@ -57,6 +58,7 @@ const Properties = () => {
               className={cardStyles.propertiesCard}
               sx={{ maxWidth: 420, m: 1, p: 2 }}
             >
+              {console.log(property)}
               <Link href={"/Properties/" + property.Id} key={property.Id}>
                 <CardActionArea>
                   <CardHeader title={property?.Name} />

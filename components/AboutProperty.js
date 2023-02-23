@@ -3,6 +3,8 @@ import { Box, Container } from "@mui/material";
 import React, { useEffect } from "react";
 import HolidayVillageIcon from "@mui/icons-material/HolidayVillage";
 import Star from "@mui/icons-material/AutoAwesome";
+import SmokingRoomsIcon from "@mui/icons-material/SmokingRooms";
+import SmokeFreeIcon from "@mui/icons-material/SmokeFree";
 import propertyInfo from "../styles/PropertyInfo.module.css";
 export default function AboutProperty({ property }) {
   const pushPin = {
@@ -37,6 +39,15 @@ export default function AboutProperty({ property }) {
               {property?.Pets} <Star /> Pet Friendly
             </span>
           ) : null}
+          {property?.Smoking == true ? (
+            <span>
+              {property?.Pets} <SmokingRoomsIcon /> Smoking Allowed
+            </span>
+          ) : (
+            <span>
+              <SmokeFreeIcon /> No Smoking
+            </span>
+          )}
           {property?.Patio == true ? (
             <span>
               <Star />

@@ -3,29 +3,25 @@ import { useState, useEffect } from "react";
 import { ref, get } from "firebase/database";
 import { database } from "../components/firebase";
 import { Card, CardMedia, CardContent, CardActionArea } from "@mui/material";
+import cardStyles from "../styles/ShowCabins.module.css";
 
 export default function MyProperties() {
   const { user } = useAuth();
-  const propertiesRef = ref(database, "users/" + user?.uid);
+  const myPropertiesRef = ref(database, "users/" + user?.uid + "/Properties");
   const [allProperties, setAllProperties] = useState([]);
-
-  const getProperties = async () => (await get(propertiesRef)).val();
+  const getProperties = async () => (await get(myPropertiesRef)).val();
 
   useEffect(() => {
-    getProperties().then((User) => {
-      setAllProperties(
-        Object.values(User).flatMap(({ properties }) =>
-          properties ? Object.values(properties) : []
-        )
-      );
+    getProperties().then((properties) => {
+      setAllProperties(properties ? Object.keys(properties) : []);
     });
-    console.log(allProperties);
   }, []);
 
   return (
     <AuthUserProvider>
       <>
         <div>
+          <span>testing all properties</span>
           {allProperties.map((property) => (
             <Card
               key={property.Id}

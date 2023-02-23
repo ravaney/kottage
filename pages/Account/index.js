@@ -44,15 +44,19 @@ export default function Dashboard(userInfo) {
   const handleProfile = () => {
     setaddProperty(false);
     setMyProfile(true);
+    setMyProperties(false);
     console.log(myProfile);
   };
   const handleAddProperty = () => {
     setMyProfile(false);
     setaddProperty(true);
+    setMyProperties(false);
   };
   const handleMyProperties = () => {
     setMyProperties(true);
     setController(false);
+    setaddProperty(false);
+    setMyProfile(false);
   };
   const handleFavourites = () => {
     setFavourites(true);
