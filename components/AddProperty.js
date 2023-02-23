@@ -8,6 +8,8 @@ import { v4 } from "uuid"; // random id generator
 import { firestore } from "../components/firebase";
 import { setDoc, doc } from "firebase/firestore";
 import { Input } from "antd";
+import { Backdrop, CircularProgress } from "@mui/material";
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 
 const AddProperty = () => {
   const [propertyName, setPropertyName] = useState("");
@@ -18,12 +20,22 @@ const AddProperty = () => {
   const [thumb, setThumbnail] = useState("");
   const [loading, setLoading] = useState(false);
   const { TextArea } = Input;
+  const [open, setOpen] = useState(false);
+  const [uploadComplete, setUploadComplete] = useState(false);
 
   const [id, setId] = useState("");
   var time = Date.now();
 
+  const handleToggle = () => {
+    setOpen(!open);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const submitForm = (e) => {
     e.preventDefault();
+    handleClick;
 
     const createProperty = async (values) => {
       console.log(id);
@@ -34,6 +46,11 @@ const AddProperty = () => {
         Name: propertyName,
         thumbnail: thumb,
         OwnerId: auth.currentUser.uid,
+        Id: id,
+        Pets: true,
+        Smoking: false,
+        Patio: true,
+        LivingRoom: true,
       });
       for (var i = 1; i <= 5; i++) {
         set(ref(database, "ratings/" + id + "/" + i.toString() + "_Star"), {
@@ -42,6 +59,7 @@ const AddProperty = () => {
       }
 
       console.log("data written to db");
+      setUploadComplete(true);
       setLoading(false);
     };
 
@@ -60,8 +78,8 @@ const AddProperty = () => {
           (err) => alert(err),
           () => {
             getDownloadURL(uploadTask.snapshot.ref).then(async (imageUrl) => {
-              setThumbnail(imageUrl);
               console.log("thumbnail " + thumb);
+              setThumbnail(imageUrl);
               try {
                 await setDoc(
                   doc(firestore, propertyName + "-" + id, imageName),
@@ -69,7 +87,8 @@ const AddProperty = () => {
                     url: imageUrl,
                   }
                 );
-                console.log("success");
+                setThumbnail(imageUrl);
+                console.log("success , image added to db");
                 setLoading(false);
               } catch (err) {
                 alert(err);
@@ -87,6 +106,10 @@ const AddProperty = () => {
 
   function onImageChange(images) {
     setImages([...images.target.files]);
+  }
+  function handleClick() {
+    if (propertyName != "" && phone != "" && description != "" && rooms != "")
+      setLoading(true);
   }
   return (
     <>
@@ -140,13 +163,26 @@ const AddProperty = () => {
           onChange={onImageChange}
           multiple
         />
+
         <button
           type="submit"
+          onClick={handleToggle}
           disabled={loading}
           style={{ display: "block", marginBottom: "20px" }}
         >
-          Submit
+          Create Property
         </button>
+        <Backdrop
+          sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+          open={open}
+          onClick={handleClose}
+        >
+          {uploadComplete ? (
+            <CheckCircleOutlineIcon color="success" fontSize="large" />
+          ) : (
+            <CircularProgress color="inherit" />
+          )}
+        </Backdrop>
       </form>
     </>
   );
