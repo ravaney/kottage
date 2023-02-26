@@ -1,9 +1,9 @@
 import * as React from "react";
 import Popover from "@mui/material/Popover";
 import Typography from "@mui/material/Typography";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { IconButton } from "@mui/material";
+import { Avatar, IconButton } from "@mui/material";
 import navStyles from "../styles/Nav.module.css";
+import { auth } from "./firebase";
 export default function BasicPopover() {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -25,7 +25,7 @@ export default function BasicPopover() {
         variant="contained"
         onClick={handleClick}
       >
-        <AccountCircleIcon className={navStyles.pfp} />
+        <Avatar src={auth?.currentUser?.photoURL} />
       </IconButton>
       <Popover
         id={id}
@@ -36,9 +36,14 @@ export default function BasicPopover() {
           vertical: "bottom",
           horizontal: "left",
         }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "left",
+        }}
+        style={{ boxSizing: "border-box" }}
       >
-        <Typography sx={{ p: 0, m: 0 }}>
-          <ul>
+        <Typography style={{ maxWidth: "200px", justifyContent: "left" }}>
+          <ul className={navStyles.popover}>
             <li>Login/Logout</li>
             <li>Account</li>
             <li>Your Trips</li>

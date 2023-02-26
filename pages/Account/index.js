@@ -79,7 +79,14 @@ export default function Dashboard(userInfo) {
   return (
     <div className={accountStyles.mainContainer}>
       <div className={accountStyles.sidebarContainer}>
-        <div style={{ height: "20vh" }}>
+        <div
+          style={{
+            height: "25vh",
+            boxSizing: "border-box",
+            paddingTop: "20px",
+            borderBottom: "1px solid #00B1F2",
+          }}
+        >
           <Avatar
             className={accountStyles.avatar}
             src={auth?.currentUser?.photoURL}

@@ -61,7 +61,7 @@ const Nav = () => {
           </ul>
         )}
         <li style={{ margin: "0px" }}>
-          <AccountMenu className={navStyles.pfp} />
+          <AccountMenu />
         </li>
       </ul>
     </nav>
