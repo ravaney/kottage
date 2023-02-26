@@ -15,10 +15,10 @@ export default function Profile({ userInfo }) {
         <Typography variant="h6">Email: {userInfo?.email}</Typography>
         <Typography variant="h6">Phone: {userInfo?.phone}</Typography>
       </Paper>
-      <Container>
+      <div>
         <UpdatePfp />
         <UpdateEmailAndPassword />
-      </Container>
+      </div>
     </>
   );
 }
