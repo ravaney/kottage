@@ -3,6 +3,7 @@ import navStyles from "../styles/Nav.module.css";
 import AccountMenu from "../components/AccountMenu.js";
 import { useAuth } from "./contexts/userContext";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 const Nav = () => {
   const { logout, user } = useAuth();
@@ -17,6 +18,10 @@ const Nav = () => {
       alert(err);
     }
   }
+
+  useEffect(() => {
+    console.log("Username updated");
+  }, [user?.displayName]);
 
   return (
     <nav className={navStyles.nav}>

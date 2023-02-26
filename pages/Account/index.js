@@ -18,6 +18,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import MailIcon from "@mui/icons-material/Mail";
 import Profile from "../../components/AccountComponents/Profile";
 import MyReservations from "../../components/MyReservations";
+import profileStyles from "../../styles/Profile.module.css";
 
 export default function Dashboard(userInfo) {
   const [controller, setController] = useState(false);
@@ -30,22 +31,11 @@ export default function Dashboard(userInfo) {
   const [Reservations, setReservations] = useState(controller);
   const [Inbox, setInbox] = useState(controller);
   const [Invoices, setInvoices] = useState(controller);
-  // useEffect(() => {
-  //   console.log(user?.uid);
-  // }, [user]);
 
-  // const userRef = ref(database, "users/" + user?.uid);
-  // const getUser = async () => (await get(userRef)).val();
-  // useEffect(() => {
-  //   getUser().then((userinfo) => {
-  //     setUserInfo(userinfo);
-  //   });
-  // }, []);
   const handleProfile = () => {
     setaddProperty(false);
     setMyProfile(true);
     setMyProperties(false);
-    console.log(myProfile);
   };
   const handleAddProperty = () => {
     setMyProfile(false);
@@ -81,91 +71,86 @@ export default function Dashboard(userInfo) {
   useEffect(() => {
     setMyProfile(true);
   }, []);
+  useEffect(() => {
+    console.log("Profile pic updated");
+    console.log(auth?.currentUser?.photoURL);
+  }, [auth?.currentUser?.photoURL]);
 
   return (
-    <>
-      <Container
-        style={{
-          marginLeft: "0px",
-          paddingLeft: "0px",
-          display: "flex",
-          alignItems: "center",
-        }}
-      >
-        <div className={accountStyles.sidebarContainer}>
+    <div className={accountStyles.mainContainer}>
+      <div className={accountStyles.sidebarContainer}>
+        <div style={{ height: "20vh" }}>
           <Avatar
             className={accountStyles.avatar}
-            src={userInfo?.photoURL}
+            src={auth?.currentUser?.photoURL}
             alt="profile pic"
             size="lg"
+            sx={{ width: 24, height: 24 }}
           />
           <Typography variant="h6" className={accountStyles.name}>
-            {userInfo?.displayName}
+            {auth?.currentUser?.displayName}
           </Typography>
-          <Button className={accountStyles.sideButtons} onClick={handleProfile}>
-            {" "}
-            <AccountBoxIcon className={accountStyles.icon} />
-            Profile
-          </Button>
-          <Button className={accountStyles.sideButtons} onClick={handleInbox}>
-            {" "}
-            <MailIcon className={accountStyles.icon} />
-            Inbox
-          </Button>
-          <Button
-            className={accountStyles.sideButtons}
-            onClick={handleMyProperties}
-          >
-            {" "}
-            <HouseIcon className={accountStyles.icon} />
-            My Properties
-          </Button>
-          <Button
-            className={accountStyles.sideButtons}
-            onClick={handleAddProperty}
-          >
-            {" "}
-            <PlusOneIcon className={accountStyles.icon} />
-            New Property
-          </Button>
-          <Button className={accountStyles.sideButtons} onClick={handleInvoice}>
-            {" "}
-            <ReceiptIcon className={accountStyles.icon} />
-            Invoices
-          </Button>
-          <Button
-            className={accountStyles.sideButtons}
-            onClick={handleBookings}
-          >
-            {" "}
-            <BookingsIcon className={accountStyles.icon} />
-            Bookings
-          </Button>
-          <Button
-            className={accountStyles.sideButtons}
-            onClick={handleReservations}
-          >
-            {" "}
-            <BookingsIcon className={accountStyles.icon} />
-            Reservations
-          </Button>
-          <Button
-            className={accountStyles.sideButtons}
-            onClick={handleFavourites}
-          >
-            {" "}
-            <FavoriteIcon className={accountStyles.icon} />
-            Favourites
-          </Button>
         </div>
-        <Container>
-          {addProperty && <AddProperty />}
-          {myProperties && <MyProperties />}
-          {myProfile && <Profile userInfo={userInfo?.props?.userInfo} />}
-          {/* <MyReservations user={userInfo} /> */}
-        </Container>
+        <Button className={accountStyles.sideButtons} onClick={handleProfile}>
+          {" "}
+          <AccountBoxIcon className={accountStyles.icon} />
+          Profile
+        </Button>
+        <Button className={accountStyles.sideButtons} onClick={handleInbox}>
+          {" "}
+          <MailIcon className={accountStyles.icon} />
+          Inbox
+        </Button>
+        <Button
+          className={accountStyles.sideButtons}
+          onClick={handleMyProperties}
+        >
+          {" "}
+          <HouseIcon className={accountStyles.icon} />
+          My Properties
+        </Button>
+        <Button
+          className={accountStyles.sideButtons}
+          onClick={handleAddProperty}
+        >
+          {" "}
+          <PlusOneIcon className={accountStyles.icon} />
+          New Property
+        </Button>
+        <Button className={accountStyles.sideButtons} onClick={handleInvoice}>
+          {" "}
+          <ReceiptIcon className={accountStyles.icon} />
+          Invoices
+        </Button>
+        <Button className={accountStyles.sideButtons} onClick={handleBookings}>
+          {" "}
+          <BookingsIcon className={accountStyles.icon} />
+          Bookings
+        </Button>
+        <Button
+          className={accountStyles.sideButtons}
+          onClick={handleReservations}
+        >
+          {" "}
+          <BookingsIcon className={accountStyles.icon} />
+          Reservations
+        </Button>
+        <Button
+          className={accountStyles.sideButtons}
+          onClick={handleFavourites}
+        >
+          {" "}
+          <FavoriteIcon className={accountStyles.icon} />
+          Favourites
+        </Button>
+      </div>
+      <Container className={accountStyles.content}>
+        {addProperty && <AddProperty />}
+        {myProperties && <MyProperties />}
+        {myProfile && <Profile userInfo={userInfo?.props?.userInfo} />}
+        {/* <MyReservations user={userInfo} /> */}
       </Container>
-    </>
+    </div>
   );
 }
 
