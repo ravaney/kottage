@@ -11,33 +11,38 @@ import { useEffect } from "react";
 export default function UpdatePfp() {
   const { user } = useAuth();
   const [name, setName] = useState("");
-  const [url, setUrl] = useState("");
   const [image, setImage] = useState(null);
+  const [pfpUpdated, setPfpUpdated] = useState(false);
+  const [userUpdated, setUserUpdated] = useState(false);
   const auth = getAuth();
 
   const handleUpdates = async (e) => {
     e.preventDefault();
-    await addImages();
 
     updateProfile(auth?.currentUser, {
       displayName: name,
     })
       .then(() => {
-        console.log("profile updated");
+        setUserUpdated(true);
+        console.log("Username updated");
       })
       .catch((error) => {
         console.log(error);
       });
   };
 
+  const updatePfp = async (e) => {
+    e.preventDefault();
+    await addImages();
+  };
+
   const addImages = async () => {
-    const imageName = image.name;
     const storageRef = ref(
       storage,
       "users/" + user?.uid + "/pfp/" + `${image}`
     );
     const uploadTask = uploadBytesResumable(storageRef, image);
-    uploadBytesResumable(storageRef, image).on(
+    await uploadBytesResumable(storageRef, image).on(
       "state_changed",
       (snapshot) => {},
       (err) => alert(err),
@@ -46,6 +51,7 @@ export default function UpdatePfp() {
           updateProfile(auth?.currentUser, {
             photoURL: imageUrl,
           });
+          setPfpUpdated(true);
           console.log("profile pic uploaded");
         });
       }
@@ -53,7 +59,7 @@ export default function UpdatePfp() {
   };
   useEffect(() => {
     console.log("url updated");
-  }, [url, name]);
+  }, [name]);
 
   return (
     <div>
@@ -67,6 +73,12 @@ export default function UpdatePfp() {
           name="name"
           placeholder={user?.displayName}
         />
+        <button type="submit">Update</button>
+      </form>
+      {userUpdated == true ? (
+        <span style={{ color: "green" }}>Username updated !!</span>
+      ) : null}
+      <form onSubmit={updatePfp}>
         <Typography>Update Profile Picture</Typography>
         <input
           type="file"
@@ -79,6 +91,9 @@ export default function UpdatePfp() {
         />
         <button type="submit">Update</button>
       </form>
+      {pfpUpdated == true ? (
+        <span style={{ color: "green" }}>Profile picture updated !!</span>
+      ) : null}
     </div>
   );
 }

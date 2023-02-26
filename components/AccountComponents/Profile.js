@@ -6,18 +6,19 @@ import UpdatePfp from "./UpdatePfp";
 import UpdateEmailAndPassword from "./UpdateEmailAndPassword";
 export default function Profile({ userInfo }) {
   return (
-    <Paper className={profileStyles.head}>
-      <Typography variant="h6">
-        Name: {userInfo?.first_name} {userInfo?.last_name}
-      </Typography>
-      <Typography variant="h6">Address: {userInfo?.address}</Typography>
-      <Typography variant="h6">Email: {userInfo?.email}</Typography>
-      <Typography variant="h6">Phone: {userInfo?.phone}</Typography>
-
+    <>
+      <Paper className={profileStyles.head}>
+        <Typography variant="h6">
+          Name: {userInfo?.first_name} {userInfo?.last_name}
+        </Typography>
+        <Typography variant="h6">Address: {userInfo?.address}</Typography>
+        <Typography variant="h6">Email: {userInfo?.email}</Typography>
+        <Typography variant="h6">Phone: {userInfo?.phone}</Typography>
+      </Paper>
       <Container>
         <UpdatePfp />
         <UpdateEmailAndPassword />
       </Container>
-    </Paper>
+    </>
   );
 }

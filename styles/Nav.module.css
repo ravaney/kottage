@@ -15,6 +15,12 @@
     
     
   }
+  .popover{
+    display: block;
+    flex-wrap: nowrap;
+    margin: 0px 0px 0px ;
+    padding: 10px 32px 10px 32px;
+  }
   
   .nav ul {
     display: flex;
@@ -39,13 +45,14 @@
   }
 
   .pfp{
-    justify-content: flex-end;
+    justify-content: flex-start;
     position: relative;
     height: 48px !important;
     width: 48px !important;
     display: block;
-    float: right;
+    float: left;
     color: #007BA7 ;
+    margin: 0px;
 
   }
 

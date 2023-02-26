@@ -8,15 +8,23 @@ export default function UpdateEmailAndPassword() {
   const user = auth?.currentUser;
   const [newPassword, setNewPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [pwUpdated, setPwUpdated] = useState(false);
+  const [emailUpdated, setEmailUpdated] = useState(false);
 
   const changePassword = () => {
     updatePassword(user, newPassword)
-      .then(() => console.log("Password changed successfully"))
+      .then(() => {
+        console.log("Password changed successfully");
+        setPwUpdated(true);
+      })
       .catch((error) => console.log(error));
   };
   const changeEmail = () => {
     updateEmail(user, email)
-      .then(() => console.log("Email updated successfully"))
+      .then(() => {
+        console.log("Email updated successfully");
+        setEmailUpdated(true);
+      })
       .catch((error) => console.log(error));
   };
   return (
@@ -33,6 +41,9 @@ export default function UpdateEmailAndPassword() {
         />
         <button type="submit">Change Password</button>
       </form>
+      {pwUpdated == true ? (
+        <span style={{ color: "green" }}>Password updated !!</span>
+      ) : null}
       <form onSubmit={changeEmail}>
         <Typography>Change Email</Typography>
         <input
@@ -45,6 +56,9 @@ export default function UpdateEmailAndPassword() {
         />
         <button type="submit">Change Email</button>
       </form>
+      {emailUpdated == true ? (
+        <span style={{ color: "green" }}>Email updated !!</span>
+      ) : null}
     </div>
   );
 }

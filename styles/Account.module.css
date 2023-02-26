@@ -2,7 +2,6 @@
     background-color: #0679A2 ;
     padding:0px;
     height:100vh;
-    padding-top: 20px;
     width: 20vw;
     display: block;
     margin-left: 0px;
@@ -42,12 +41,12 @@
     width: 100px !important;
 }
 .name{
-    margin:20px;
-    padding: 20px;
+    margin:auto;
+    padding: 20px 0px 20px 0px;
     display: flex;
     color: white;
     justify-content: center;
-    border-bottom: 1px solid #00B1F2;
+    /* border-bottom: 1px solid #00B1F2; */
 }
 .icon{
     margin-right: 20px;
