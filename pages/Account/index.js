@@ -32,6 +32,8 @@ export default function Dashboard(userInfo) {
   const [Inbox, setInbox] = useState(controller);
   const [Invoices, setInvoices] = useState(controller);
 
+  const { user } = useAuth();
+
   const handleProfile = () => {
     setaddProperty(false);
     setMyProfile(true);
@@ -70,11 +72,7 @@ export default function Dashboard(userInfo) {
   };
   useEffect(() => {
     setMyProfile(true);
-  }, []);
-  useEffect(() => {
-    console.log("Profile pic updated");
-    console.log(auth?.currentUser?.photoURL);
-  }, [auth?.currentUser?.photoURL]);
+  }, [auth]);
 
   return (
     <div className={accountStyles.mainContainer}>

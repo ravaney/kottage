@@ -34,6 +34,7 @@ export default function UpdateEmailAndPassword() {
         <input
           type="password"
           placeholder="1234"
+          required
           id="password"
           onChange={(e) => {
             setNewPassword(e.target.value);
@@ -49,6 +50,7 @@ export default function UpdateEmailAndPassword() {
         <input
           type="email"
           id="email"
+          required
           placeholder={user?.email}
           onChange={(e) => {
             setEmail(e.target.value);
