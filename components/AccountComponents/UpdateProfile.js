@@ -69,6 +69,7 @@ export default function UpdatePfp() {
           onChange={(e) => setName(e.target.value)}
           value={name}
           id="name"
+          required
           type="text"
           name="name"
           placeholder={user?.displayName}
@@ -84,6 +85,7 @@ export default function UpdatePfp() {
           type="file"
           id="file"
           accept="image/*"
+          required
           name="file"
           onChange={(e) => {
             setImage(e.target.files[0]);
