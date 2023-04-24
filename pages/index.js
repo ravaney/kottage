@@ -21,6 +21,7 @@ export default function Home({ images, properties }) {
     <div>
       <title>Kottage</title>
       <meta name="keywords" content="web dev" lang="en" />
+
       <Search />
       <Gallery images={images} />
       <ShowCabins />

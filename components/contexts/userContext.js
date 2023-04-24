@@ -4,12 +4,17 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { createContext, useContext, useEffect, useState } from "react";
-import { auth } from "../firebase";
+import { auth, database } from "../firebase";
+import { get, ref } from "firebase/database";
+
 const authUserContext = createContext({});
 
 export const AuthUserProvider = ({ children }) => {
   const [user, setUser] = useState();
   const [loading, setLoading] = useState();
+  const propertyRef = ref(database, "properties");
+
+  const [allProperties, setAllProperties] = useState([]);
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (user) => {
@@ -27,6 +32,17 @@ export const AuthUserProvider = ({ children }) => {
     return unsub;
   }, []);
 
+  useEffect(() => {
+    const getProperties = async () => (await get(propertyRef)).val();
+
+    const getAllProperties = async () => {
+      const properties = await getProperties();
+      const data = await properties;
+      setAllProperties(data ? Object.values(data) : []);
+    };
+    getAllProperties();
+  }, []);
+
   const signup = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
   };
@@ -41,7 +57,9 @@ export const AuthUserProvider = ({ children }) => {
   };
 
   return (
-    <authUserContext.Provider value={{ user, login, signup, logout }}>
+    <authUserContext.Provider
+      value={{ user, login, signup, logout, allProperties }}
+    >
       {loading ? null : children}
     </authUserContext.Provider>
   );

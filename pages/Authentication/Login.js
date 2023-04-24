@@ -42,6 +42,7 @@ const Login = () => {
       router.push("/");
     } catch (err) {
       console.log(err);
+      console.log("failure ");
     }
 
     setLoading(false);
@@ -49,7 +50,9 @@ const Login = () => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="email">Email</label>
+        <label htmlFor="email" style={{ color: "red" }}>
+          Email
+        </label>
         <input
           onChange={(e) => setEmail(e.target.value)}
           value={email}
@@ -57,6 +60,11 @@ const Login = () => {
           type="email"
           name="email"
         />
+
+        <div style={{ display: "block" }}>
+          <label>Country</label>
+          <input></input>
+        </div>
 
         <div style={{ display: "block" }}>
           <label htmlFor="password">Password</label>
